@@ -44,14 +44,15 @@ socket& socket::operator=(socket& sock) {
 	return *this;
 }
 
+// the deconstrunction do nothing
 socket::~socket(){
-	sockaddr addr;
-	int addrlen;
-	int ret = getpeername(_socket, &addr, &addrlen);
-	if (ret == 0) {
-		shutdown(SD_BOTH);
-		close();
-	}
+	// sockaddr addr;
+	// int addrlen;
+	// int ret = getpeername(_socket, &addr, &addrlen);
+	// if (ret == 0) {
+	// 	shutdown(SD_BOTH);
+	// 	close();
+	// }
 }
 
 SOCKET socket::accept(struct sockaddr *addr, int *addrlen) {
@@ -89,7 +90,7 @@ ssize_t socket::send(const char *buff, size_t len, int flag){
 
 ssize_t socket::recv(char *buff, size_t len, int flag){
 	ssize_t bytes_recv = ::recv(_socket, buff, len, flag);
-	if (bytes_recv == -1)set_errno();
+	set_errno();
 	return bytes_recv;
 }
 

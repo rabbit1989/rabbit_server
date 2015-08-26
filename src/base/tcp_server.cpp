@@ -80,7 +80,6 @@ void tcp_server::close(){
 void tcp_server::run(){
 	char recv_buff[BUFFER_SIZE*5];
 	char tmp_buff[BUFFER_SIZE];
-
 	while (true){
 		socket new_conn(_socket.accept(NULL, NULL));
 
@@ -88,26 +87,29 @@ void tcp_server::run(){
 			fprintf(stderr, "find new client!!\n");
 			add_client(new_conn);
 		}
+		
 		for (int i = _num_cur_clients-1; i >= 0; i--) {
 			int num_recv_bytes = 0;
 			while (true) {
 				int num_bytes = _clients[i].recv(tmp_buff, sizeof(tmp_buff), 0);
-				if (_clients[i].get_errno() == WSAEWOULDBLOCK) {
-					if (num_recv_bytes > 0)
-			 			process_data(recv_buff, num_recv_bytes);
-			 		break;
-			 	}
-			 	append_buffer((char*)recv_buff, num_recv_bytes, (char*)tmp_buff, num_bytes);
-			 	num_recv_bytes += num_bytes;
-			 	fprintf(stderr, "num_recv_bytes: %d\n", num_recv_bytes);
+				if(_clients[i].get_errno() == WSAEWOULDBLOCK ) {
+				 	if (num_recv_bytes > 0)
+			  			process_data(recv_buff, num_recv_bytes);
+			  		break;
+			  	}
+			  	
+			  	append_buffer((char*)recv_buff, num_recv_bytes, (char*)tmp_buff, num_bytes);
+			  	num_recv_bytes += num_bytes;
+			  	fprintf(stderr, "num_recv_bytes: %d\n", num_recv_bytes);
 			 }
 		}
+	
 	}
 }
 
 void tcp_server::process_data(char data[], int num_bytes) {
 	data[num_bytes] = 0;
-	printf("%s\n", data);
+	fprintf(stderr, "%s\n", data);
 }
 
 void tcp_server::append_buffer(char *dst_buffer, int dst_len, char *src_buffer, int src_len) {

@@ -19,7 +19,7 @@ int main()
 	char msg[200];
 	while (true) {
 		sprintf(msg, "Hello server I am client! time: %d ", cur_time);
-		printf("send message %s to server\n", msg);
+		fprintf(stderr, "send message %s to server\n", msg);
 		client.send((char*)msg, strlen(msg));
 		cur_time += 1;
 		Sleep(1000);
