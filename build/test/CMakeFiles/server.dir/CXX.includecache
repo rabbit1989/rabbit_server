@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/base/socket.hpp
+winsock2.h
+-
+sys/types.h
+-
+unistd.h
+-
+fcntl.h
+-
+sys/socket.h
+-
+string
+-
+uncopyable.hpp
+../src/base/uncopyable.hpp
+
+../src/base/tcp_server.hpp
+socket.hpp
+../src/base/socket.hpp
+
+../src/utils/uncopyable.hpp
+
+E:/work/engine/rabbit_server/test/server.cpp
+tcp_server.hpp
+E:/work/engine/rabbit_server/test/tcp_server.hpp
+

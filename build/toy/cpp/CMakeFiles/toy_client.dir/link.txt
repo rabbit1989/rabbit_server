@@ -1,0 +1,1 @@
+C:\MinGW\bin\g++.exe     -Wl,@CMakeFiles\toy_client.dir\objects1.rsp  -o toy_client.exe -Wl,--out-implib,libtoy_client.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lws2_32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

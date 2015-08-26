@@ -1,0 +1,1 @@
+C:\MinGW\bin\g++.exe     -Wl,@CMakeFiles\server.dir\objects1.rsp  -o server.exe -Wl,--out-implib,libserver.dll.a -Wl,--major-image-version,0,--minor-image-version,0  ..\src\libserver_lib.a -lws2_32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

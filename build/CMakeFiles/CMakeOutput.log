@@ -1,0 +1,213 @@
+The system is: Windows - 6.1 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/MinGW/bin/gcc.exe 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+The C compiler identification is GNU, found in "E:/work/engine/rabbit_server/build/CMakeFiles/3.3.0/CompilerIdC/a.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: C:/MinGW/bin/g++.exe 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+
+The CXX compiler identification is GNU, found in "E:/work/engine/rabbit_server/build/CMakeFiles/3.3.0/CompilerIdCXX/a.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_eb25b/fast"
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_eb25b.dir\build.make CMakeFiles/cmTC_eb25b.dir/build
+mingw32-make.exe[1]: Entering directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eb25b.dir/testCCompiler.c.obj
+C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTC_eb25b.dir\testCCompiler.c.obj   -c E:\work\engine\rabbit_server\build\CMakeFiles\CMakeTmp\testCCompiler.c
+Linking C executable cmTC_eb25b.exe
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_eb25b.dir\link.txt --verbose=1
+C:\MinGW\bin\gcc.exe       -Wl,@CMakeFiles\cmTC_eb25b.dir\objects1.rsp  -o cmTC_eb25b.exe -Wl,--out-implib,libcmTC_eb25b.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
+mingw32-make.exe[1]: Leaving directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_701ed/fast"
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_701ed.dir\build.make CMakeFiles/cmTC_701ed.dir/build
+mingw32-make.exe[1]: Entering directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_701ed.dir/CMakeCCompilerABI.c.obj
+C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTC_701ed.dir\CMakeCCompilerABI.c.obj   -c "C:\Program Files (x86)\CMake\share\cmake-3.3\Modules\CMakeCCompilerABI.c"
+Linking C executable cmTC_701ed.exe
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_701ed.dir\link.txt --verbose=1
+C:\MinGW\bin\gcc.exe      -v -Wl,@CMakeFiles\cmTC_701ed.dir\objects1.rsp  -o cmTC_701ed.exe -Wl,--out-implib,libcmTC_701ed.dll.a -Wl,--major-image-version,0,--minor-image-version,0   
+Reading specs from C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/specs
+Configured with: ../gcc-3.4.5-20060117-3/configure --with-gcc --with-gnu-ld --with-gnu-as --host=mingw32 --target=mingw32 --prefix=/mingw --enable-threads --disable-nls --enable-languages=c,c++,f77,ada,objc,java --disable-win32-registry --disable-shared --enable-sjlj-exceptions --enable-libgcj --disable-java-awt --without-x --enable-java-gc=boehm --disable-libgcj-debug --enable-interpreter --enable-hash-synchronization --enable-libstdcxx-debug
+Thread model: win32
+gcc version 3.4.5 (mingw-vista special r3)
+ C:/MinGW/bin/../libexec/gcc/mingw32/3.4.5/collect2.exe -Bdynamic -o cmTC_701ed.exe C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../crt2.o C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtbegin.o -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5 -LC:/MinGW/bin/../lib/gcc -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../.. @CMakeFiles\cmTC_701ed.dir\objects1.rsp --out-implib libcmTC_701ed.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt -luser32 -lkernel32 -ladvapi32 -lshell32 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtend.o
+mingw32-make.exe[1]: Leaving directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld\.exe|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_701ed/fast"]
+  ignore line: [C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_701ed.dir\build.make CMakeFiles/cmTC_701ed.dir/build]
+  ignore line: [mingw32-make.exe[1]: Entering directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_701ed.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTC_701ed.dir\CMakeCCompilerABI.c.obj   -c "C:\Program Files (x86)\CMake\share\cmake-3.3\Modules\CMakeCCompilerABI.c"]
+  ignore line: [Linking C executable cmTC_701ed.exe]
+  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_701ed.dir\link.txt --verbose=1]
+  ignore line: [C:\MinGW\bin\gcc.exe      -v -Wl,@CMakeFiles\cmTC_701ed.dir\objects1.rsp  -o cmTC_701ed.exe -Wl,--out-implib,libcmTC_701ed.dll.a -Wl,--major-image-version,0,--minor-image-version,0   ]
+  ignore line: [Reading specs from C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/specs]
+  ignore line: [Configured with: ../gcc-3.4.5-20060117-3/configure --with-gcc --with-gnu-ld --with-gnu-as --host=mingw32 --target=mingw32 --prefix=/mingw --enable-threads --disable-nls --enable-languages=c,c++,f77,ada,objc,java --disable-win32-registry --disable-shared --enable-sjlj-exceptions --enable-libgcj --disable-java-awt --without-x --enable-java-gc=boehm --disable-libgcj-debug --enable-interpreter --enable-hash-synchronization --enable-libstdcxx-debug]
+  ignore line: [Thread model: win32]
+  ignore line: [gcc version 3.4.5 (mingw-vista special r3)]
+  link line: [ C:/MinGW/bin/../libexec/gcc/mingw32/3.4.5/collect2.exe -Bdynamic -o cmTC_701ed.exe C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../crt2.o C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtbegin.o -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5 -LC:/MinGW/bin/../lib/gcc -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../.. @CMakeFiles\cmTC_701ed.dir\objects1.rsp --out-implib libcmTC_701ed.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt -luser32 -lkernel32 -ladvapi32 -lshell32 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtend.o]
+    arg [C:/MinGW/bin/../libexec/gcc/mingw32/3.4.5/collect2.exe] ==> ignore
+    arg [-Bdynamic] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_701ed.exe] ==> ignore
+    arg [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../crt2.o] ==> ignore
+    arg [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtbegin.o] ==> ignore
+    arg [-LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5] ==> dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5]
+    arg [-LC:/MinGW/bin/../lib/gcc] ==> dir [C:/MinGW/bin/../lib/gcc]
+    arg [-LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib] ==> dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib]
+    arg [-LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../..] ==> dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../..]
+    arg [@CMakeFiles\cmTC_701ed.dir\objects1.rsp] ==> ignore
+    arg [--out-implib] ==> ignore
+    arg [libcmTC_701ed.dll.a] ==> ignore
+    arg [--major-image-version] ==> ignore
+    arg [0] ==> ignore
+    arg [--minor-image-version] ==> ignore
+    arg [0] ==> ignore
+    arg [-lmingw32] ==> lib [mingw32]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lmoldname] ==> lib [moldname]
+    arg [-lmingwex] ==> lib [mingwex]
+    arg [-lmsvcrt] ==> lib [msvcrt]
+    arg [-luser32] ==> lib [user32]
+    arg [-lkernel32] ==> lib [kernel32]
+    arg [-ladvapi32] ==> lib [advapi32]
+    arg [-lshell32] ==> lib [shell32]
+    arg [-lmingw32] ==> lib [mingw32]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lmoldname] ==> lib [moldname]
+    arg [-lmingwex] ==> lib [mingwex]
+    arg [-lmsvcrt] ==> lib [msvcrt]
+    arg [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtend.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc]
+  collapse library dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5] ==> [C:/MinGW/lib/gcc/mingw32/3.4.5]
+  collapse library dir [C:/MinGW/bin/../lib/gcc] ==> [C:/MinGW/lib/gcc]
+  collapse library dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib] ==> [C:/MinGW/mingw32/lib]
+  collapse library dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../..] ==> [C:/MinGW/lib]
+  implicit libs: [mingw32;moldname;mingwex;msvcrt;user32;kernel32;advapi32;shell32;mingw32;moldname;mingwex;msvcrt]
+  implicit dirs: [C:/MinGW/lib/gcc/mingw32/3.4.5;C:/MinGW/lib/gcc;C:/MinGW/mingw32/lib;C:/MinGW/lib]
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_d3b6a/fast"
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_d3b6a.dir\build.make CMakeFiles/cmTC_d3b6a.dir/build
+mingw32-make.exe[1]: Entering directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_d3b6a.dir/testCXXCompiler.cxx.obj
+C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTC_d3b6a.dir\testCXXCompiler.cxx.obj -c E:\work\engine\rabbit_server\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
+Linking CXX executable cmTC_d3b6a.exe
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_d3b6a.dir\link.txt --verbose=1
+C:\MinGW\bin\g++.exe       -Wl,@CMakeFiles\cmTC_d3b6a.dir\objects1.rsp  -o cmTC_d3b6a.exe -Wl,--out-implib,libcmTC_d3b6a.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
+mingw32-make.exe[1]: Leaving directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_3a01c/fast"
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_3a01c.dir\build.make CMakeFiles/cmTC_3a01c.dir/build
+mingw32-make.exe[1]: Entering directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3a01c.dir/CMakeCXXCompilerABI.cpp.obj
+C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTC_3a01c.dir\CMakeCXXCompilerABI.cpp.obj -c "C:\Program Files (x86)\CMake\share\cmake-3.3\Modules\CMakeCXXCompilerABI.cpp"
+Linking CXX executable cmTC_3a01c.exe
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_3a01c.dir\link.txt --verbose=1
+C:\MinGW\bin\g++.exe      -v -Wl,@CMakeFiles\cmTC_3a01c.dir\objects1.rsp  -o cmTC_3a01c.exe -Wl,--out-implib,libcmTC_3a01c.dll.a -Wl,--major-image-version,0,--minor-image-version,0   
+Reading specs from C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/specs
+Configured with: ../gcc-3.4.5-20060117-3/configure --with-gcc --with-gnu-ld --with-gnu-as --host=mingw32 --target=mingw32 --prefix=/mingw --enable-threads --disable-nls --enable-languages=c,c++,f77,ada,objc,java --disable-win32-registry --disable-shared --enable-sjlj-exceptions --enable-libgcj --disable-java-awt --without-x --enable-java-gc=boehm --disable-libgcj-debug --enable-interpreter --enable-hash-synchronization --enable-libstdcxx-debug
+Thread model: win32
+gcc version 3.4.5 (mingw-vista special r3)
+ C:/MinGW/bin/../libexec/gcc/mingw32/3.4.5/collect2.exe -Bdynamic -o cmTC_3a01c.exe C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../crt2.o C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtbegin.o -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5 -LC:/MinGW/bin/../lib/gcc -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../.. @CMakeFiles\cmTC_3a01c.dir\objects1.rsp --out-implib libcmTC_3a01c.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt -luser32 -lkernel32 -ladvapi32 -lshell32 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtend.o
+mingw32-make.exe[1]: Leaving directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld\.exe|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"C:/MinGW/bin/mingw32-make.exe" "cmTC_3a01c/fast"]
+  ignore line: [C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_3a01c.dir\build.make CMakeFiles/cmTC_3a01c.dir/build]
+  ignore line: [mingw32-make.exe[1]: Entering directory `E:/work/engine/rabbit_server/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_3a01c.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [C:\MinGW\bin\g++.exe     -o CMakeFiles\cmTC_3a01c.dir\CMakeCXXCompilerABI.cpp.obj -c "C:\Program Files (x86)\CMake\share\cmake-3.3\Modules\CMakeCXXCompilerABI.cpp"]
+  ignore line: [Linking CXX executable cmTC_3a01c.exe]
+  ignore line: ["C:\Program Files (x86)\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_3a01c.dir\link.txt --verbose=1]
+  ignore line: [C:\MinGW\bin\g++.exe      -v -Wl,@CMakeFiles\cmTC_3a01c.dir\objects1.rsp  -o cmTC_3a01c.exe -Wl,--out-implib,libcmTC_3a01c.dll.a -Wl,--major-image-version,0,--minor-image-version,0   ]
+  ignore line: [Reading specs from C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/specs]
+  ignore line: [Configured with: ../gcc-3.4.5-20060117-3/configure --with-gcc --with-gnu-ld --with-gnu-as --host=mingw32 --target=mingw32 --prefix=/mingw --enable-threads --disable-nls --enable-languages=c,c++,f77,ada,objc,java --disable-win32-registry --disable-shared --enable-sjlj-exceptions --enable-libgcj --disable-java-awt --without-x --enable-java-gc=boehm --disable-libgcj-debug --enable-interpreter --enable-hash-synchronization --enable-libstdcxx-debug]
+  ignore line: [Thread model: win32]
+  ignore line: [gcc version 3.4.5 (mingw-vista special r3)]
+  link line: [ C:/MinGW/bin/../libexec/gcc/mingw32/3.4.5/collect2.exe -Bdynamic -o cmTC_3a01c.exe C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../crt2.o C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtbegin.o -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5 -LC:/MinGW/bin/../lib/gcc -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib -LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../.. @CMakeFiles\cmTC_3a01c.dir\objects1.rsp --out-implib libcmTC_3a01c.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt -luser32 -lkernel32 -ladvapi32 -lshell32 -lmingw32 -lgcc -lmoldname -lmingwex -lmsvcrt C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtend.o]
+    arg [C:/MinGW/bin/../libexec/gcc/mingw32/3.4.5/collect2.exe] ==> ignore
+    arg [-Bdynamic] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_3a01c.exe] ==> ignore
+    arg [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../crt2.o] ==> ignore
+    arg [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtbegin.o] ==> ignore
+    arg [-LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5] ==> dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5]
+    arg [-LC:/MinGW/bin/../lib/gcc] ==> dir [C:/MinGW/bin/../lib/gcc]
+    arg [-LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib] ==> dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib]
+    arg [-LC:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../..] ==> dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../..]
+    arg [@CMakeFiles\cmTC_3a01c.dir\objects1.rsp] ==> ignore
+    arg [--out-implib] ==> ignore
+    arg [libcmTC_3a01c.dll.a] ==> ignore
+    arg [--major-image-version] ==> ignore
+    arg [0] ==> ignore
+    arg [--minor-image-version] ==> ignore
+    arg [0] ==> ignore
+    arg [-lmingw32] ==> lib [mingw32]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lmoldname] ==> lib [moldname]
+    arg [-lmingwex] ==> lib [mingwex]
+    arg [-lmsvcrt] ==> lib [msvcrt]
+    arg [-luser32] ==> lib [user32]
+    arg [-lkernel32] ==> lib [kernel32]
+    arg [-ladvapi32] ==> lib [advapi32]
+    arg [-lshell32] ==> lib [shell32]
+    arg [-lmingw32] ==> lib [mingw32]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lmoldname] ==> lib [moldname]
+    arg [-lmingwex] ==> lib [mingwex]
+    arg [-lmsvcrt] ==> lib [msvcrt]
+    arg [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/crtend.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc]
+  collapse library dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5] ==> [C:/MinGW/lib/gcc/mingw32/3.4.5]
+  collapse library dir [C:/MinGW/bin/../lib/gcc] ==> [C:/MinGW/lib/gcc]
+  collapse library dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../../../mingw32/lib] ==> [C:/MinGW/mingw32/lib]
+  collapse library dir [C:/MinGW/bin/../lib/gcc/mingw32/3.4.5/../../..] ==> [C:/MinGW/lib]
+  implicit libs: [mingw32;moldname;mingwex;msvcrt;user32;kernel32;advapi32;shell32;mingw32;moldname;mingwex;msvcrt]
+  implicit dirs: [C:/MinGW/lib/gcc/mingw32/3.4.5;C:/MinGW/lib/gcc;C:/MinGW/mingw32/lib;C:/MinGW/lib]
+  implicit fwks: []
+
+
