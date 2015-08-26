@@ -57,34 +57,31 @@ socket::~socket(){
 
 SOCKET socket::accept(struct sockaddr *addr, int *addrlen) {
 	SOCKET conn = ::accept(_socket, addr, addrlen);
-	if (conn ==-1) {
-		_state = -1;
-		set_errno();
-	}
+	set_errno();
 	return conn;
 }
 
 int socket::listen(int backlog){
 	int ret = ::listen(_socket, backlog);
-	if (ret != 0) set_errno();
+	set_errno();
 	return ret;
 }
 
 int socket::bind(const struct sockaddr *addr, int len) {
 	int ret = ::bind(_socket, addr, len);
-	if (ret != 0) set_errno();
+	set_errno();
 	return ret;
 }
 
 int socket::connect(const struct sockaddr *addr, int len) {
 	int ret = ::connect(_socket, addr, len);
-	if (ret != 0) set_errno();
+	set_errno();
 	return ret;
 }
 
 ssize_t socket::send(const char *buff, size_t len, int flag){
 	ssize_t bytes_sent = ::send(_socket, buff, len, flag);
-	if (bytes_sent == -1)set_errno();
+	set_errno();
 	return bytes_sent;
 }
 
@@ -96,7 +93,7 @@ ssize_t socket::recv(char *buff, size_t len, int flag){
 
 int socket::shutdown(int how) {
 	int ret = ::shutdown(_socket, how);
-	if (ret != 0) set_errno();
+	set_errno();
 	return ret;
 }
 
@@ -107,10 +104,7 @@ int socket::close() {
 	#else
 		int ret = ::close(_socket);
 	#endif
-
-	if (ret != 0) {
-		set_errno();
-	}
+	set_errno();
 	return ret;
 }
 
@@ -120,17 +114,12 @@ int socket::set_nonblocking(u_long mode) {
 		ret = ioctlsocket(_socket, FIONBIO, &mode);
 	#else
 		int flags = fcntl(_socket, F_GETFL, 0);
-		if (flags < 0){
-			ret = -1;
-			set_errno();
-		}
-		else {
+		if (flags >= 0) {
 			flags = mode ? (flags|O_NONBLOCK) : (flags&~O_NONBLOCK);
 			ret = fcntl(_scoket, F_SETFL, flags);
 		}
 	#endif
-
-	if (ret != 0) set_errno();
+	set_errno();
 	return ret;
 }
 
