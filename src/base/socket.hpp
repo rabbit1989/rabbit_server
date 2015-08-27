@@ -46,12 +46,12 @@ typedef std::pair<std::string, u_int> sock_addr;
 class socket{
 public:
 	socket(int, int, int);
+	socket(): _socket(SOCKET_ERROR){};
 	socket(SOCKET);
-	socket(socket&);
-	socket(){};
-	socket& operator=(socket&);
+	socket(const socket&);
+	socket& operator=(const socket&);
 	virtual ~socket();
-	SOCKET accept(struct sockaddr*, int*);
+	socket accept(struct sockaddr*, int*);
 	int listen(int);
 	int bind(const struct sockaddr*, int);
 	int	connect(const struct sockaddr*, int);
@@ -59,8 +59,6 @@ public:
 	ssize_t recv(char*, size_t, int);
 	int shutdown(int);
 	int close();
-	SOCKET get_fd();
-	void set_fd(SOCKET);
 	bool is_valid();
 
 	//set socket to blocking/nonblocking mode
@@ -79,6 +77,10 @@ public:
 	//return address pair()
 	const sock_addr& get_addr() const;
 
+private:
+	SOCKET get_rawsocket() const;
+	void set_rawsocket(SOCKET);
+	
 private:
 	sock_addr _addr;
 	SOCKET _socket;

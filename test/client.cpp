@@ -1,16 +1,24 @@
-#include <windows.h>
 #include <cstdio>
 #include <cstring>
 #include "tcp_client.hpp"
-	
+#if defined(WIN32)
+	#include <windows.h>
+#else
+	#include <unistd.h>
+#endif	
+
 int main()
 {
-	WSADATA wsadata;
-	int ret = WSAStartup(MAKEWORD(2, 2), &wsadata);
-	if (ret != NO_ERROR) {
-		fprintf(stderr, "tcp client initialization failed: %d", ret);
-		return -1;
-	}
+
+	#if defined(WIN32)
+		WSADATA wsadata;
+		int ret = WSAStartup(MAKEWORD(2, 2), &wsadata);
+		if (ret != NO_ERROR) {
+			fprintf(stderr, "tcp client initialization failed: %d", ret);
+			return -1;
+		}
+	
+	#endif
 	
 	rabbit::tcp_client client;
 	client.connect("127.0.0.1", 65534);
@@ -22,10 +30,19 @@ int main()
 		fprintf(stderr, "send message %s to server\n", msg);
 		client.send((char*)msg, strlen(msg));
 		cur_time += 1;
-		Sleep(1000);
+		#if defined(WIN32)
+			Sleep(1000);
+		#else
+			sleep(1);
+		#endif
 	}
 	client.close();
 	
-	WSACleanup();
+	#if defined(WIN32)
+		WSACleanup();
+	#else
+		sleep(1);
+	#endif
+	
 	return 0;
 }

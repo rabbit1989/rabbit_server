@@ -35,16 +35,18 @@ socket::socket(SOCKET sock) {
 	_socket = sock;
 }
 
-socket::socket(socket& sock) {
-	_socket = sock.get_fd();
+socket::socket(const socket& sock) {
+	_socket = sock.get_rawsocket();
+//	sock.set_rawsocket(SOCKET_ERROR);
 }
 
-socket& socket::operator=(socket& sock) {
-	_socket = sock.get_fd();
+socket& socket::operator=(const socket& sock) {
+	_socket = sock.get_rawsocket();
+//	sock.set_rawsocket(SOCKET_ERROR);
 	return *this;
 }
 
-// the deconstrunction do nothing
+//deconstructor does nothing
 socket::~socket(){
 	// sockaddr addr;
 	// int addrlen;
@@ -55,10 +57,10 @@ socket::~socket(){
 	// }
 }
 
-SOCKET socket::accept(struct sockaddr *addr, int *addrlen) {
+socket socket::accept(struct sockaddr *addr, int *addrlen) {
 	SOCKET conn = ::accept(_socket, addr, addrlen);
 	set_errno();
-	return conn;
+	return socket(conn);
 }
 
 int socket::listen(int backlog){
@@ -123,11 +125,11 @@ int socket::set_nonblocking(u_long mode) {
 	return ret;
 }
 
-SOCKET socket::get_fd() {
+SOCKET socket::get_rawsocket() const{
 	return _socket;
 }
 
-void socket::set_fd(SOCKET sock) {
+void socket::set_rawsocket(SOCKET sock) {
 	_socket = sock;
 }
 

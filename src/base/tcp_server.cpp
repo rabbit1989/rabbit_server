@@ -69,7 +69,7 @@ void tcp_server::add_client(socket& sock){
 		fprintf(stderr, "tcp_server: can not accept new connection! num of connect has reached limits!\n");
 		return;
 	}
-	_clients[_num_cur_clients++].set_fd(sock.get_fd());
+	_clients[_num_cur_clients++] = sock;
 }
 
 void tcp_server::close(){
@@ -81,7 +81,7 @@ void tcp_server::run(){
 	char recv_buff[BUFFER_SIZE*5];
 	char tmp_buff[BUFFER_SIZE];
 	while (true){
-		socket new_conn(_socket.accept(NULL, NULL));
+		socket new_conn = _socket.accept(NULL, NULL);
 
 		if (new_conn.is_valid() == true) {
 			fprintf(stderr, "find new client!!\n");
@@ -100,7 +100,6 @@ void tcp_server::run(){
 			  	
 			  	append_buffer((char*)recv_buff, num_recv_bytes, (char*)tmp_buff, num_bytes);
 			  	num_recv_bytes += num_bytes;
-			  	fprintf(stderr, "num_recv_bytes: %d\n", num_recv_bytes);
 			 }
 		}
 	
