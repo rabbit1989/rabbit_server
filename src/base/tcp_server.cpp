@@ -32,14 +32,16 @@ int const BUFFER_SIZE = 200;
 
 
 tcp_server::tcp_server(): 
-	_socket(AF_INET, SOCK_STREAM, 0)
-	{
+	_socket(AF_INET, SOCK_STREAM, 0),
+	_has_new_conn(false)
+{
 		init_clients(DEFAULT_CLINET_NUM);
 }
 
 tcp_server::tcp_server(int num_clients):
-	_socket(AF_INET, SOCK_STREAM, 0)
-	{
+	_socket(AF_INET, SOCK_STREAM, 0),
+	_has_new_conn(false)
+{
 		init_clients(num_clients);
 }
 
@@ -78,41 +80,27 @@ void tcp_server::close(){
 }
 
 void tcp_server::run(){
-	char recv_buff[BUFFER_SIZE*5];
-	char tmp_buff[BUFFER_SIZE];
 	while (true){
 		socket new_conn = _socket.accept(NULL, NULL);
-
+		_has_new_conn = false;
 		if (new_conn.is_valid() == true) {
 			fprintf(stderr, "find new client!!\n");
+			_has_new_conn = true;
 			add_client(new_conn);
-		}
-		
+		}	
+
 		for (int i = _num_cur_clients-1; i >= 0; i--) {
-			int num_recv_bytes = 0;
 			while (true) {
-				int num_bytes = _clients[i].recv(tmp_buff, sizeof(tmp_buff), 0);
-				if(_clients[i].get_errno() == WSAEWOULDBLOCK ) {
-				 	if (num_recv_bytes > 0)
-			  			process_data(recv_buff, num_recv_bytes);
-			  		break;
-			  	}
-			  	
-			  	append_buffer((char*)recv_buff, num_recv_bytes, (char*)tmp_buff, num_bytes);
-			  	num_recv_bytes += num_bytes;
-			 }
+				_clients[i].sendAll();
+				_clients[i].recvAll();
+			}
 		}
 	
 	}
 }
 
-void tcp_server::process_data(char data[], int num_bytes) {
-	data[num_bytes] = 0;
-	fprintf(stderr, "%s\n", data);
-}
-
-void tcp_server::append_buffer(char *dst_buffer, int dst_len, char *src_buffer, int src_len) {
-	memcpy(dst_buffer+dst_len, src_buffer, src_len);
+bool tcp_server::has_new_connection(){
+	return _has_new_conn;
 }
 
 }

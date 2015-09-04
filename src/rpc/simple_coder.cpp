@@ -19,45 +19,17 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *******************************************************************************************
-       					header file of nonblocking tcp server
+       					a simple of rpc coder
 *******************************************************************************************/
 
-#ifndef TCP_SERVER_HPP
-#define TCP_SERVER_HPP
-
-#include "socket.hpp"
+#include "simple_coder.hpp"
 
 namespace rabbit{
-
-int const DEFAULT_CLINET_NUM = 3;
-
-class tcp_server: uncopyable{
-public:
-	tcp_server();
-	tcp_server(int);
-	virtual ~tcp_server();
-
-	//initialize client data
-	void init_clients(int);
-
-	//the tcp server must be initialized before using
-	void init(std::string, int);
+	const std::string simple_coder::encode(const char*func_name, va_list para_list){
+			
+	}
 	
-	void run();
-	void add_client(socket&);
-	void close();
-	bool has_new_connection();
-private:
-	socket _socket;
-	socket *_clients;
-	int _num_max_clients;
-	int _num_cur_clients;
+	pair<std::string, std::string[]> simple_coder::decode(std::string &){
 
-	//this value is updated every time accept() is called,
-	//it is set to true if new connection found, false otherwise
-	bool _has_new_conn;
-};
-
+	}
 }
-
-#endif

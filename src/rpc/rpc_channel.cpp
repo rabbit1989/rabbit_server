@@ -24,3 +24,24 @@ DEALINGS IN THE SOFTWARE.
 
 #include "rpc_channel.hpp"
 
+namespace rabbit{
+
+void rpc_channel::init(const string ip, int port){
+	_client.connect(ip, port);
+}
+
+void rpc_channel::rpc_call(const char* func_name, ...){
+	va_list args;
+    va_start(args, format_str);
+    string msg = _rpc_coder->decode(args);
+    _client.write(msg.c_str(), strlen(msg.c_str));
+    va_end(args);
+}
+
+void rpc_channel::rpc_response() {
+
+}
+
+void rpc_channel::register_func(std::string func_name){
+
+}

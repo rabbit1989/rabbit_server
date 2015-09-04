@@ -27,13 +27,35 @@ DEALINGS IN THE SOFTWARE.
 #ifndef RPC_CHANNEL_HPP
 #define RPC_CHANNEL_HPP
 
+namespace rabbit{
+
+#include <map>
+#include <string>
+
 #include "uncopyable.hpp"
+#include "tcp_client.hpp"
+#include "rpc_coder.hpp"
 
 class rpc_channel: uncopyable{
 public:
+	void init(const std::string, int);
 
+	//call rpc method
+	void rpc_call(const char*, ...);	
+	
+	//receive data and execute rpc method
+	void rpc_response();
+	
+	//register rpc methods
+	void register_func(const std::string);	
+
+	void set_rpc_coder(rpc_coder_base*);
 private:
-
+	tcp_client _client;
+	map<std::string, > _func_map;
+	rpc_coder_base *_rpc_coder;
 };
+
+}
 
 #endif

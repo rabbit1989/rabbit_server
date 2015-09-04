@@ -31,17 +31,39 @@ DEALINGS IN THE SOFTWARE.
 
 namespace rabbit{
 
+int const BUFFER_SIZE = 2000;
+
 class tcp_client: uncopyable{
 public:
-	tcp_client(): _socket(AF_INET, SOCK_STREAM, 0){};
+	tcp_client();
 	~tcp_client();
-	void connect(std::string, int);
+	void connect(const std::string, int);
 	void close();
-	ssize_t send(char*, int);
+
+	//wrapper function of socket send
+	ssize_t send(const char*, int);
+	
+	//wrapper function of socket recv	
 	ssize_t recv(char*, int);	
+
+	//sender write buffer to network
+	ssize_t sendAll();
+
+	//receive data from network and store in read buffer
+	ssize_t recvAll();
+
+	//copy data to write buffer
+	ssize_t write(const char*, int);
+
+	//copy data from read buffer
+	void read(char*, int);
 
 private:
 	socket _socket;
+	char *_read_buff;
+	char *_write_buff;
+	uint _read_buff_size;
+	uint _write_buff_size;
 };
 
 }
