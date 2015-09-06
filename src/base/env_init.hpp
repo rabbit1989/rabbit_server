@@ -19,29 +19,25 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *******************************************************************************************
-       					a simple of rpc coder
+					initialize socket environment					
 *******************************************************************************************/
 
-#include <cstdlib>
+#ifndef ENV_INIT_HPP
+#define ENV_INIT_HPP
 
-#include "simple_coder.hpp"
-#include "string_utils.hpp"
+#if defined(WIN32)
+	#include <winsock2.h>
+	#include <windows.h>
+#else
+	#include <sys/types.h>
+    #include <unistd.h>
+    #include <fcntl.h>
+	#include <sys/socket.h>
+#endif
 
 namespace rabbit{
-	const std::string simple_coder::encode(const char*func_name, va_list para_list){
-		std::string msg = "#" + std::string(func_name);
-		char num_in_str[10];
-		int para = va_arg(para_list, int);
-		while (para != -1) {
-			itoa(para, num_in_str, 10);
-			msg += " " + std::string(num_in_str);
-			para = va_arg(par_list, int);
-		}
-		return msg;
-	}
-	
-	pair<std::string, std::vector<std::string> > simple_coder::decode(std::string &msg){
-		std::vector<std::string> para_list = string_split(msg, ' ');
-		return make_pair(para_list[1], std::vector(msg.begin()+1, msg.end()));
-	}
+	void init_env();
+	void destroy_env();
 }
+
+#endif

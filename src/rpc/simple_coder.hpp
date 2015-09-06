@@ -19,7 +19,8 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *******************************************************************************************
-       					a simple of rpc coder
+       			a simple of rpc coder, assume that each parameter of the
+				rpc function is an integer.
 *******************************************************************************************/
 
 #ifndef SIMPLE_CODER_HPP
@@ -29,8 +30,9 @@ DEALINGS IN THE SOFTWARE.
 
 namespace rabbit{
 	class simple_coder: public rpc_coder_base {
+		// variable length parameter list ends with -1
 		virtual const std::string encode(const char*, va_list);
-		virtual pair<std::string, std::string[]> decode(std::string &);
+		virtual pair<std::string, vector<std::string> > decode(std::string &);
 	};
 }
 

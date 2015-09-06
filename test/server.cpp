@@ -1,14 +1,10 @@
 #include "tcp_server.hpp"
+#include "env_init.hpp"
 
 int main(){
 
-	#if defined(WIN32)
-		WSADATA wsaData;
-		int ret = WSAStartup(MAKEWORD(2, 2), &wsaData);
-		if (ret != NO_ERROR) {
-			fprintf(stderr, "winsock initialization failed: %d", ret);
-		}
-	#endif
+	//must be called before any operations
+	init_env();
 
 	rabbit::tcp_server simple_server(10);
 	simple_server.init("127.0.0.1", 65534);
@@ -16,8 +12,8 @@ int main(){
 	simple_server.run();
 	simple_server.close();
 	
-	#if defined(WIN32)
-		WSACleanup();
-	#endif
+	//must be called when all operations finished
+	destroy_env();
+
 	return 0;
 }

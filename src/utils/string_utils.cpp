@@ -1,4 +1,4 @@
-/********************************************************************************************
+/***********************************************************************
 Copyright (C) rabbit1989 2015
 
 https://github.com/rabbit1989/rabbit_server
@@ -18,30 +18,24 @@ PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS 
 FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
-*******************************************************************************************
-       					a simple of rpc coder
-*******************************************************************************************/
+*************************************************************************
+                some string processing functions
+*************************************************************************/
 
-#include <cstdlib>
-
-#include "simple_coder.hpp"
 #include "string_utils.hpp"
 
 namespace rabbit{
-	const std::string simple_coder::encode(const char*func_name, va_list para_list){
-		std::string msg = "#" + std::string(func_name);
-		char num_in_str[10];
-		int para = va_arg(para_list, int);
-		while (para != -1) {
-			itoa(para, num_in_str, 10);
-			msg += " " + std::string(num_in_str);
-			para = va_arg(par_list, int);
+	std::vector<std::string> string_split(const string &str, char sep) {
+		std::vector<std::string> ret();
+		size_t i = 0, j = 0;
+		size_t length = str.length();
+		while (i < length) {
+			while (i < length && str[i] == sep)i++;
+			j = i+1;
+			while (j < length && str[j] != sep)j++;
+			ret.insert(str.substr(i, j-i));
+			i = j+1;
 		}
-		return msg;
-	}
-	
-	pair<std::string, std::vector<std::string> > simple_coder::decode(std::string &msg){
-		std::vector<std::string> para_list = string_split(msg, ' ');
-		return make_pair(para_list[1], std::vector(msg.begin()+1, msg.end()));
+		return ret;
 	}
 }
