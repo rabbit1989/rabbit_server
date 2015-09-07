@@ -1,2 +1,0 @@
-C:\MinGW\bin\ar.exe cq libserver_lib.a  CMakeFiles/server_lib.dir/base/socket.cpp.obj CMakeFiles/server_lib.dir/base/tcp_client.cpp.obj CMakeFiles/server_lib.dir/base/tcp_server.cpp.obj
-C:\MinGW\bin\ranlib.exe libserver_lib.a

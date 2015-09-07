@@ -1,3 +1,0 @@
-E:/work/engine/rabbit_server/build/src/CMakeFiles/server_lib.dir
-E:/work/engine/rabbit_server/build/test/CMakeFiles/client.dir
-E:/work/engine/rabbit_server/build/test/CMakeFiles/server.dir

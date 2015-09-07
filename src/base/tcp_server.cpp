@@ -90,10 +90,8 @@ void tcp_server::run(){
 		}	
 
 		for (int i = _num_cur_clients-1; i >= 0; i--) {
-			while (true) {
-				_clients[i].sendAll();
-				_clients[i].recvAll();
-			}
+			_clients[i].sendAll();
+			_clients[i].recvAll();
 		}
 	
 	}
