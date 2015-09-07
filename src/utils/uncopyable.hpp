@@ -26,7 +26,7 @@ DEALINGS IN THE SOFTWARE.
 #define UNCOPYABLE_HPP
 
 class uncopyable{
-public:
+protected:
     uncopyable(){};
     ~uncopyable(){};
 private:

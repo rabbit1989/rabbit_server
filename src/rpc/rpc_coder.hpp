@@ -29,13 +29,14 @@ namespace rabbit{
 
 #include <string>
 #include <pair>
+#include <vector>
 #include <stdarg.h>
 #include <cstring>
 
 class rpc_coder_base{
 public:
 	virtual const std::string encode(const char*, va_list) = 0;
-	virtual pair<std::string, std::string[]> decode(std::string &) = 0;
+	virtual pair<std::string, vector<std::string> > decode(std::string &) = 0;
 };
 
 }
