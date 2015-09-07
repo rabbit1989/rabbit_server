@@ -32,7 +32,7 @@ void rpc_channel::init(const string ip, int port){
 
 void rpc_channel::rpc_call(const char* func_name, ...){
 	va_list args;
-    va_start(args, format_str);
+    va_start(args, func_name);
     string msg = _rpc_coder->decode(args);
     _client.write(msg.c_str(), strlen(msg.c_str));
     va_end(args);
@@ -44,4 +44,8 @@ void rpc_channel::rpc_response() {
 
 void rpc_channel::register_func(std::string func_name){
 
+}
+
+void rpc_channel::set_rpc_coder(rpc_coder_base *coder) {
+	_rpc_coder = coder;
 }
