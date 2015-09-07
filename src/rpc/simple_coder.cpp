@@ -37,6 +37,7 @@ namespace rabbit{
 			msg += " " + std::string(num_in_str);
 			para = va_arg(par_list, int);
 		}
+		msg += "#";
 		return msg;
 	}
 	

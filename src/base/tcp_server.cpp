@@ -28,8 +28,8 @@ DEALINGS IN THE SOFTWARE.
 
 namespace rabbit{
 
+int const DEFAULT_CLINET_NUM = 3;
 int const BUFFER_SIZE = 200;
-
 
 tcp_server::tcp_server(): 
 	_socket(AF_INET, SOCK_STREAM, 0),
@@ -81,24 +81,31 @@ void tcp_server::close(){
 
 void tcp_server::run(){
 	while (true){
-		socket new_conn = _socket.accept(NULL, NULL);
-		_has_new_conn = false;
-		if (new_conn.is_valid() == true) {
-			fprintf(stderr, "find new client!!\n");
-			_has_new_conn = true;
-			add_client(new_conn);
-		}	
+		loop();	
+	}
+}
 
-		for (int i = _num_cur_clients-1; i >= 0; i--) {
-			_clients[i].sendAll();
-			_clients[i].recvAll();
-		}
-	
+void tcp_server::loop() {
+	socket new_conn = _socket.accept(NULL, NULL);
+	_has_new_conn = false;
+	if (new_conn.is_valid() == true) {
+		fprintf(stderr, "find new client!!\n");
+		_has_new_conn = true;
+		add_client(new_conn);
+	}	
+
+	for (int i = _num_cur_clients-1; i >= 0; i--) {
+		_clients[i].sendAll();
+		_clients[i].recvAll();
 	}
 }
 
 bool tcp_server::has_new_connection(){
 	return _has_new_conn;
+}
+
+socket tcp_server::get_new_connection() {
+	return _clients[_num_cur_clients-1];
 }
 
 }

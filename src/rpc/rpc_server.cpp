@@ -19,51 +19,58 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *******************************************************************************************
-       					implementation of a simple rpc channel
+       					simple rpc server
 *******************************************************************************************/
-#include <pair>
-#include <cstdlib>
-#include "rpc_channel.hpp"
+#include <cstdio>
+#include "rpc_server.hpp"
 
 namespace rabbit{
 
-void rpc_channel::init(const string ip, int port){
-	_client.connect(ip, port);
+const int MAX_NUM_CHANNEL = 50;
+
+rpc_server::rpc_server(){
+	_channel_list = (rpc_channel**)malloc(sizeof(rpc_channel*) * MAX_NUM_CHANNEL);
+	_num_channel = 0;
 }
 
-void rpc_channel::rpc_call(const char* func_name, ...){
-	va_list args;
-    va_start(args, func_name);
-    string msg = _rpc_coder->encode(args);
-    _client.write(msg.c_str(), strlen(msg.c_str));
-    va_end(args);
+rpc_server::~rpc_server() {
+	for (int i = 0; i < _num_channel; i++) 
+		delete _channel_list[i];
+	free(_channel_list);
 }
 
-void rpc_channel::rpc_response() {
-	int num_bytes = _client.read(_read_buff + _buff_len, 300-_buff_len);
-	_buff_len += num_bytes;
-	if (_read_buff[0] == '#') {
-		int i = 1;
-		for (i = 1; i < _buff_len; i++)
-			if (_read_buff[i] == '#')
-				break;
-		if (i != _buff_len) {
-			std::pair<std::string, std::vector<std::string> >para = _rpc_coder->decode(_read_buff+1, _read_buff+i);				
-			std::string func_name = para.first;
-			std::vector<std::string> para_list = para.second;			
-			_func_map[func_name](this, atoi(para_list[0].c_str()), atoi(para_list[1].c_str());
+void rpc_server::init(const std::string &addr, const int port) {
+	_server.init(addr, port);
+}
+
+void rpc_server::run() {
+	while (true) {
+		_server.loop();
+		if (_server.has_new_connection()) {
+			add_channel(_server.get_new_connection());
 		}
+		for (int i = 0; i < _num_channel; i++) 
+			_channel_list[i]->rpc_response();
 	}
 }
 
-void rpc_channel::register_func(std::string func_name, rpc_channel::func_ptr ptr){
-	_func_map[func_name] = ptr;
+void rpc_server::add_channel(tcp_client& client) {
+	if (_num_channel >= MAX_NUM_CHANNEL) {
+		fprintf(stderr, "rpc_server::add_channel(): number of channel reaches maximum!!\n");
+		return;
+	}
+	_channel_list[_num_channel] = new rpc_channel;
+	_channel_list[_num_channel]->set_client(client);
+	_channel_list[_num_channel]->set_rpc_coder(_rpc_coder);
+	_num_channel++;
 }
 
-void rpc_channel::set_rpc_coder(rpc_coder_base *coder) {
-	_rpc_coder = coder;
+void rpc_server::close() {
+	_server.close();
 }
 
-void rpc_channel::set_client(tcp_client &client) {
-	_client = client;
+void rpc_server::set_rpc_coder(rpc_coder_base *rpc_coder) {
+	_rpc_coder = rpc_coder;
+}
+
 }

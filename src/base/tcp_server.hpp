@@ -29,8 +29,6 @@ DEALINGS IN THE SOFTWARE.
 
 namespace rabbit{
 
-int const DEFAULT_CLINET_NUM = 3;
-
 class tcp_server: uncopyable{
 public:
 	tcp_server();
@@ -47,6 +45,8 @@ public:
 	void add_client(socket&);
 	void close();
 	bool has_new_connection();
+	socket get_new_connection();
+	void loop();
 private:
 	socket _socket;
 	socket *_clients;

@@ -38,6 +38,10 @@ namespace rabbit{
 
 class rpc_channel: uncopyable{
 public:
+
+	rpc_channel():_buff_len(0){};
+	rpc_channel(tcp_client& client):_client(client), _buff_len(0){};
+
 	void init(const std::string, int);
 
 	//call rpc method
@@ -46,14 +50,23 @@ public:
 	//receive data and execute rpc method
 	void rpc_response();
 	
+	typedef void(*func_ptr)(void*, int, int);
+
 	//register rpc methods
-	void register_func(const std::string);	
+	void register_func(const std::string, func_ptr);	
 
 	void set_rpc_coder(rpc_coder_base*);
+	
+	void set_client(tcp_client&);
+
 private:
 	tcp_client _client;
-	map<std::string, > _func_map;
+	map<std::string, func_ptr> _func_map;
 	rpc_coder_base *_rpc_coder;
+
+	//the buffer will be removed later
+	char _read_buff[300];
+	int _buff_len;
 };
 
 }
