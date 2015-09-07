@@ -52,6 +52,11 @@ void rpc_channel::rpc_response() {
 			std::string func_name = para.first;
 			std::vector<std::string> para_list = para.second;			
 			_func_map[func_name](this, atoi(para_list[0].c_str()), atoi(para_list[1].c_str());
+			
+			//move the rest data in _read_buff to the front
+			for (int j = i+1; j < _buff_len; j++)
+				_read_buff[j-i-1] = _read_buff[j];
+			_buff_len -= (i+1);
 		}
 	}
 }
