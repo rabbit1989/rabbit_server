@@ -25,7 +25,7 @@ DEALINGS IN THE SOFTWARE.
 #include <cstdlib>
 
 #include "simple_coder.hpp"
-#include "string_utils.hpp"
+#include "utils/string_utils.hpp"
 
 namespace rabbit{
 	const std::string simple_coder::encode(const char*func_name, va_list para_list){
@@ -35,14 +35,14 @@ namespace rabbit{
 		while (para != -1) {
 			itoa(para, num_in_str, 10);
 			msg += " " + std::string(num_in_str);
-			para = va_arg(par_list, int);
+			para = va_arg(para_list, int);
 		}
 		msg += "#";
 		return msg;
 	}
 	
-	pair<std::string, std::vector<std::string> > simple_coder::decode(std::string &msg){
+	std::pair<std::string, std::vector<std::string> > simple_coder::decode(const std::string &msg){
 		std::vector<std::string> para_list = string_split(msg, ' ');
-		return make_pair(para_list[1], std::vector(msg.begin()+1, msg.end()));
+		return std::make_pair(para_list[1], std::vector<std::string>(para_list.begin()+1, para_list.end()));
 	}
 }

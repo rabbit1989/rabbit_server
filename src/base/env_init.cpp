@@ -23,7 +23,9 @@ DEALINGS IN THE SOFTWARE.
 *******************************************************************************************/
 
 #include "env_init.hpp"
+#include <cstdio>
 
+namespace rabbit{
 void init_env() {
 
 #if defined(WIN32)
@@ -31,7 +33,6 @@ void init_env() {
 	int ret = WSAStartup(MAKEWORD(2, 2), &wsadata);
 	if (ret != NO_ERROR) {
 		fprintf(stderr, "tcp client initialization failed: %d", ret);
-		return -1;
 	}
 #else
 	//TODO: environmnet initialization on linux platform 
@@ -44,4 +45,6 @@ void destroy_env(){
 #else
 	//TODO: environmnet destrunction on linux platform 
 #endif
+}
+
 }

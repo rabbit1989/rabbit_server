@@ -23,6 +23,7 @@ endforeach()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/base)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/utils)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/rpc)
 
 add_library(server_lib STATIC ${TMP_FILES})
 

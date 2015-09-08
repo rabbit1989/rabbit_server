@@ -4,7 +4,7 @@
 int main(){
 
 	//must be called before any operations
-	init_env();
+	rabbit::init_env();
 
 	rabbit::tcp_server simple_server(10);
 	simple_server.init("127.0.0.1", 65534);
@@ -13,7 +13,7 @@ int main(){
 	simple_server.close();
 	
 	//must be called when all operations finished
-	destroy_env();
+	rabbit::destroy_env();
 
 	return 0;
 }

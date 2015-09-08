@@ -25,14 +25,14 @@ DEALINGS IN THE SOFTWARE.
 #ifndef SIMPLE_CHANNEL_HPP
 #define SIMPLE_CHANNEL_HPP
 
-#include "rpc_channel.hpp"
+#include "rpc/rpc_channel.hpp"
 
 namespace rabbit {
 
 class simple_channel: public rpc_channel{
 public:
 	void calculate_add(int, int);
-	void on_calculate_add(int);
+	void on_calculate_add(int, int);
 };
 
 } 						

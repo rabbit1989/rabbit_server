@@ -1,4 +1,4 @@
-/********************************************************************************************
+/***********************************************************************
 Copyright (C) rabbit1989 2015
 
 https://github.com/rabbit1989/rabbit_server
@@ -18,25 +18,18 @@ PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS 
 FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
-*******************************************************************************************
-       					simple channel
-*******************************************************************************************/
+*************************************************************************
+              wrapper functions of some platform-dependent syste calls
+*************************************************************************/
 
-#include <cstdio>
-#include "simple_channel.hpp"
+#include "sys_call_wrapper.hpp"
 
 namespace rabbit{
-
-void simple_channel::calculate_add(int a, int b) {
-	int ret = a + b;
-	printf("hello, I am server! I will do calculation (%d +%d)  for you\n", a, b);
-	rpc_call("on_calculate_add", ret, 0);
+	void sleep(float miliseconds){
+		#if defined(WIN32)
+			Sleep(miliseconds);
+		#else
+			sleep(miliseconds/1000);
+		#endif
+	}
 }
-
-void simple_channel::on_calculate_add(int sum, int ret) {
-
-	printf("hello, I am client! I have received the result from server, the result is %d.\n", sum);
-}
-
- }
- 

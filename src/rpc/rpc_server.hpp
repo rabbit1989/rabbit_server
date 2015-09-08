@@ -27,22 +27,21 @@ DEALINGS IN THE SOFTWARE.
 
 #include <string>
 
-#include "rpc_channel.hpp"
-#include "rpc_coder.hpp"
-#include "tcp_server.hpp"
-#include "tcp_client.hpp"
-
+#include "rpc/rpc_channel.hpp"
+#include "rpc/rpc_coder.hpp"
+#include "base/tcp_server.hpp"
+#include "utils/uncopyable.hpp"
 
 namespace rabbit {
 
-class rpc_server {
+class rpc_server : public uncopyable {
 public:
 	rpc_server();
-	~rpc_server();
+	virtual ~rpc_server();
 	void init(const std::string&, const int);
 	void run();
 	void close();
-	void add_channel(tcp_client&);
+	void add_channel(const tcp_client&);
 	void set_rpc_coder(rpc_coder_base*);
 private:
 	rpc_channel **_channel_list;

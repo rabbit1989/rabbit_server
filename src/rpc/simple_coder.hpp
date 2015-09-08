@@ -32,7 +32,7 @@ namespace rabbit{
 	class simple_coder: public rpc_coder_base {
 		// variable length parameter list ends with -1
 		virtual const std::string encode(const char*, va_list);
-		virtual pair<std::string, vector<std::string> > decode(std::string &);
+		virtual std::pair<std::string, std::vector<std::string> > decode(const std::string &);
 	};
 }
 

@@ -8,7 +8,7 @@ int main()
 {
 
 	// must be called before any operations
-	init_env();
+	rabbit::init_env();
 
 	rabbit::tcp_client client;
 	client.connect("127.0.0.1", 65534);
@@ -29,7 +29,8 @@ int main()
 	client.close();
 	
 	//must be called when all operations finished
-	destroy_env();
+	rabbit::destroy_env();
 
 	return 0;
 }
+

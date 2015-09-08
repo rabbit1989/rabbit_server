@@ -27,22 +27,23 @@ DEALINGS IN THE SOFTWARE.
 #ifndef RPC_CHANNEL_HPP
 #define RPC_CHANNEL_HPP
 
-namespace rabbit{
-
 #include <map>
 #include <string>
 
-#include "uncopyable.hpp"
-#include "tcp_client.hpp"
-#include "rpc_coder.hpp"
+#include "base/tcp_client.hpp"
+#include "rpc/rpc_coder.hpp"
 
-class rpc_channel: uncopyable{
+namespace rabbit{
+
+class rpc_channel {
 public:
+
+	typedef void(*func_ptr)(void*, int, int);
 
 	rpc_channel():_buff_len(0){};
 	rpc_channel(tcp_client& client):_client(client), _buff_len(0){};
 
-	void init(const std::string, int);
+	void init(const std::string&, int);
 
 	//call rpc method
 	void rpc_call(const char*, ...);	
@@ -50,18 +51,16 @@ public:
 	//receive data and execute rpc method
 	void rpc_response();
 	
-	typedef void(*func_ptr)(void*, int, int);
-
 	//register rpc methods
-	void register_func(const std::string, func_ptr);	
+	void register_func(const std::string&, func_ptr);	
 
 	void set_rpc_coder(rpc_coder_base*);
 	
-	void set_client(tcp_client&);
-
+	void set_client(const tcp_client&);
+	void close();
 private:
 	tcp_client _client;
-	map<std::string, func_ptr> _func_map;
+	std::map<std::string, func_ptr> _func_map;
 	rpc_coder_base *_rpc_coder;
 
 	//the buffer will be removed later

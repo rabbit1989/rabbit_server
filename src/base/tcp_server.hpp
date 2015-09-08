@@ -25,7 +25,8 @@ DEALINGS IN THE SOFTWARE.
 #ifndef TCP_SERVER_HPP
 #define TCP_SERVER_HPP
 
-#include "socket.hpp"
+#include "base/socket.hpp"
+#include "base/tcp_client.hpp"
 
 namespace rabbit{
 
@@ -39,17 +40,17 @@ public:
 	void init_clients(int);
 
 	//the tcp server must be initialized before using
-	void init(std::string, int);
+	void init(const std::string&, int);
 	
 	void run();
 	void add_client(socket&);
 	void close();
 	bool has_new_connection();
-	socket get_new_connection();
+	tcp_client get_new_connection();
 	void loop();
 private:
 	socket _socket;
-	socket *_clients;
+	tcp_client *_clients;
 	int _num_max_clients;
 	int _num_cur_clients;
 

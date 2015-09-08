@@ -25,15 +25,15 @@ DEALINGS IN THE SOFTWARE.
 #include "string_utils.hpp"
 
 namespace rabbit{
-	std::vector<std::string> string_split(const string &str, char sep) {
-		std::vector<std::string> ret();
+	std::vector<std::string> string_split(const std::string &str, const char sep) {
+		std::vector<std::string> ret;
 		size_t i = 0, j = 0;
 		size_t length = str.length();
 		while (i < length) {
 			while (i < length && str[i] == sep)i++;
 			j = i+1;
 			while (j < length && str[j] != sep)j++;
-			ret.insert(str.substr(i, j-i));
+			ret.push_back(str.substr(i, j-i));
 			i = j+1;
 		}
 		return ret;

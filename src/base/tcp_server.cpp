@@ -53,10 +53,10 @@ tcp_server::~tcp_server(){
 void tcp_server::init_clients(int num_clients) {
 	_num_max_clients = num_clients; 
 	_num_cur_clients = 0;
-	_clients = new socket[num_clients];
+	_clients = new tcp_client[num_clients];
 }
 
-void tcp_server::init(std::string ip, int port) {
+void tcp_server::init(const std::string& ip, int port) {
 	SOCKADDR_IN addr;
 	addr.sin_family = AF_INET;
 	addr.sin_addr.s_addr = inet_addr(ip.c_str());
@@ -71,7 +71,7 @@ void tcp_server::add_client(socket& sock){
 		fprintf(stderr, "tcp_server: can not accept new connection! num of connect has reached limits!\n");
 		return;
 	}
-	_clients[_num_cur_clients++] = sock;
+	_clients[_num_cur_clients++].set_socket(sock);
 }
 
 void tcp_server::close(){
@@ -104,7 +104,7 @@ bool tcp_server::has_new_connection(){
 	return _has_new_conn;
 }
 
-socket tcp_server::get_new_connection() {
+tcp_client tcp_server::get_new_connection() {
 	return _clients[_num_cur_clients-1];
 }
 

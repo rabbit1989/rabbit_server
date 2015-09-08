@@ -29,6 +29,6 @@ DEALINGS IN THE SOFTWARE.
 #include <string>
 
 namespace rabbit{
-	std::vector<std::string > string_split(const string &, char);
+	std::vector<std::string> string_split(const std::string &, const char);
 }
 #endif

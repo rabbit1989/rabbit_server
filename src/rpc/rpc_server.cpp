@@ -34,9 +34,12 @@ rpc_server::rpc_server(){
 }
 
 rpc_server::~rpc_server() {
-	for (int i = 0; i < _num_channel; i++) 
-		delete _channel_list[i];
-	free(_channel_list);
+	if (_channel_list != 0) {
+		for (int i = 0; i < _num_channel; i++) 
+			delete _channel_list[i];
+		free(_channel_list);
+	}
+	_server.close();
 }
 
 void rpc_server::init(const std::string &addr, const int port) {
@@ -54,7 +57,7 @@ void rpc_server::run() {
 	}
 }
 
-void rpc_server::add_channel(tcp_client& client) {
+void rpc_server::add_channel(const tcp_client& client) {
 	if (_num_channel >= MAX_NUM_CHANNEL) {
 		fprintf(stderr, "rpc_server::add_channel(): number of channel reaches maximum!!\n");
 		return;
@@ -67,6 +70,11 @@ void rpc_server::add_channel(tcp_client& client) {
 
 void rpc_server::close() {
 	_server.close();
+	if (_channel_list != 0) {
+		for (int i = 0; i < _num_channel; i++)
+			_channel_list[i]->close();
+	}
+
 }
 
 void rpc_server::set_rpc_coder(rpc_coder_base *rpc_coder) {

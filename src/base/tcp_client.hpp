@@ -22,22 +22,22 @@ DEALINGS IN THE SOFTWARE.
        				header file of nonblocking tcp client
 *******************************************************************************************/
 
-#ifndef TCP_CLINET_HPP
+#ifndef TCP_CLIENT_HPP
 #define TCP_CLIENT_HPP
 
-#include "socket.hpp"
-#include "uncopyable.hpp"
+#include "base/socket.hpp"
 #include <string>
 
 namespace rabbit{
 
-int const BUFFER_SIZE = 2000;
-
-class tcp_client: uncopyable{
+class tcp_client {
 public:
 	tcp_client();
-	~tcp_client();
-	void connect(const std::string, int);
+	tcp_client(const tcp_client&);
+	const tcp_client& operator=(const tcp_client&);
+	virtual ~tcp_client();
+	
+	void connect(const std::string&, int);
 	void close();
 
 	//wrapper function of socket send
@@ -56,14 +56,17 @@ public:
 	ssize_t write(const char*, int);
 
 	//copy data from read buffer
-	void read(char*, int);
+	ssize_t read(char*, int);
 
+	socket get_socket() const;
+	void set_socket(const socket&);
+	
 private:
 	socket _socket;
 	char *_read_buff;
 	char *_write_buff;
-	uint _read_buff_size;
-	uint _write_buff_size;
+	size_t _read_buff_size;
+	size_t _write_buff_size;
 };
 
 }

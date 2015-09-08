@@ -1,33 +1,25 @@
-#if defined(WIN32)
-	#include <windows.h>
-#else
-	#include <unistd.h>
-#endif
-
-#include "simple_channel.hpp"
-#include "simple_coder.hpp"
-#include "env_init.hpp"
+#include "rpc/simple_channel.hpp"
+#include "rpc/simple_coder.hpp"
+#include "base/env_init.hpp"
+#include "utils/sys_call_wrapper.hpp"
 
 int main(){
-	env_init();
+	rabbit::init_env();
 
-	rabbit::simple_channel client();
-	rabbit::simple_coder *rpc_coder = new simple_coder;
+	rabbit::simple_channel client;
+	rabbit::simple_coder *rpc_coder = new rabbit::simple_coder;
 	client.init("127.0.0.1", 12345);
 	client.set_rpc_coder(rpc_coder);
 	for (int i = 0; i < 100; i++)
 	{
-		client.rpc_call("calculate_add", i, i);
+		// the last number is the delimiter
+		client.rpc_call("calculate_add", i, i, -1);
 		client.rpc_response();
-		
-		#if defined(WIN32)
-			Sleep(1000);
-		#else
-			sleep(1);
-		#endif
+		rabbit::sleep(1000);	
 	}
-	delete simple_coder;
-	env_destroy();
+	delete rpc_coder;
+
+	rabbit::destroy_env();
 	
 	return 0;
 }

@@ -1,16 +1,16 @@
-#include "rpc_server.hpp"
-#include "simple_coder.hpp"
-#include "env_init.hpp"
+#include "rpc/rpc_server.hpp"
+#include "rpc/simple_coder.hpp"
+#include "base/env_init.hpp"
 
 int main(){
-	env_init();
+	rabbit::init_env();
 	
 	rabbit::rpc_server server;
-	rabbit::simlpe_coder *coder = new simple_coder;
+	rabbit::simple_coder *coder = new rabbit::simple_coder;
 	server.init("127.0.0.1", 12345);
-	server.set_rpc_coder(simple_coder);
+	server.set_rpc_coder(coder);
 	server.run();
-
-	env_destroy();
+	delete coder;
+	rabbit::destroy_env();
 	return 0;	
 }
