@@ -28,9 +28,10 @@ DEALINGS IN THE SOFTWARE.
 namespace rabbit{
 
 simple_channel::simple_channel() {
-	fprintf(stderr, "simple_channel::simple_channel()\n");
 	register_func("calculate_add",  static_cast<func_ptr>(&simple_channel::calculate_add) );
 	register_func("on_calculate_add", static_cast<func_ptr>(&simple_channel::on_calculate_add) );
+	register_func("cal_max", static_cast<func_ptr>(&simple_channel::cal_max) );
+	register_func("on_cal_max", static_cast<func_ptr>(&simple_channel::on_cal_max) );		
 }
 
 void simple_channel::calculate_add(int a, int b) {
@@ -42,6 +43,16 @@ void simple_channel::calculate_add(int a, int b) {
 void simple_channel::on_calculate_add(int sum, int ret) {
 
 	printf("hello, I am client! I have received the result from server, the result is %d.\n", sum);
+}
+
+void simple_channel::cal_max(int a, int b) {
+	int ret = a > b ? a : b;
+	printf("server side: max(%d, %d)\n", a, b);
+	rpc_call("on_cal_max", ret, -1, -1);
+}
+
+void simple_channel::on_cal_max(int val, int) {
+	printf("client side: the max number is %d\n", val);
 }
 
  }

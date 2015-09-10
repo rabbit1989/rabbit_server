@@ -14,8 +14,8 @@ int main(){
 	for (int i = 0; i < 100; i++)
 	{
 		// the last number is the delimiter
-		fprintf(stderr, "calculate %d + %d...\n", i, i);
-		client.rpc_call("calculate_add", i, i, -1);
+		fprintf(stderr, "calculate max(%d, %d)...\n", i, 100-i);
+		client.rpc_call("cal_max", i, 100-i, -1);
 		client.rpc_response();
 		rabbit::sleep(1000);	
 	}

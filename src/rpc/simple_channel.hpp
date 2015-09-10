@@ -34,6 +34,8 @@ public:
 	simple_channel();
 	void calculate_add(int, int);
 	void on_calculate_add(int, int);
+	void cal_max(int, int);
+	void on_cal_max(int, int);
 };
 
 } 						
