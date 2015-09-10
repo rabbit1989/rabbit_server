@@ -31,6 +31,7 @@ namespace rabbit {
 
 class simple_channel: public rpc_channel{
 public:
+	simple_channel();
 	void calculate_add(int, int);
 	void on_calculate_add(int, int);
 };

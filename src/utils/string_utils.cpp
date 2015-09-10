@@ -21,6 +21,7 @@ DEALINGS IN THE SOFTWARE.
 *************************************************************************
                 some string processing functions
 *************************************************************************/
+#include <cstdio>
 
 #include "string_utils.hpp"
 

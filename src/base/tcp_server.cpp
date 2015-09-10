@@ -95,8 +95,8 @@ void tcp_server::loop() {
 	}	
 
 	for (int i = _num_cur_clients-1; i >= 0; i--) {
-		_clients[i].sendAll();
-		_clients[i].recvAll();
+		_clients[i].send_all();
+		_clients[i].recv_all();
 	}
 }
 

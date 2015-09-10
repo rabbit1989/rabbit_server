@@ -2,6 +2,7 @@
 #include "rpc/simple_coder.hpp"
 #include "base/env_init.hpp"
 #include "utils/sys_call_wrapper.hpp"
+#include <cstdio>
 
 int main(){
 	rabbit::init_env();
@@ -13,6 +14,7 @@ int main(){
 	for (int i = 0; i < 100; i++)
 	{
 		// the last number is the delimiter
+		fprintf(stderr, "calculate %d + %d...\n", i, i);
 		client.rpc_call("calculate_add", i, i, -1);
 		client.rpc_response();
 		rabbit::sleep(1000);	

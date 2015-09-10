@@ -23,6 +23,8 @@ DEALINGS IN THE SOFTWARE.
 *******************************************************************************************/
 #include <utility>
 #include <cstdlib>
+#include <cstdio>
+
 #include "rpc_channel.hpp"
 
 namespace rabbit{
@@ -42,7 +44,8 @@ void rpc_channel::rpc_call(const char* func_name, ...){
 void rpc_channel::rpc_response() {
 	int num_bytes = _client.read(_read_buff + _buff_len, 300-_buff_len);
 	_buff_len += num_bytes;
-	if (_read_buff[0] == '#') {
+
+	if (_buff_len && _read_buff[0] == '#') {
 		int i = 1;
 		for (i = 1; i < _buff_len; i++)
 			if (_read_buff[i] == '#')
@@ -50,9 +53,11 @@ void rpc_channel::rpc_response() {
 		if (i != _buff_len) {
 			std::pair<std::string, std::vector<std::string> >para = _rpc_coder->decode(std::string(_read_buff+1, i-1));				
 			std::string func_name = para.first;
-			std::vector<std::string> para_list = para.second;			
-			_func_map[func_name](this, atoi(para_list[0].c_str()), atoi(para_list[1].c_str()));
-			
+			std::vector<std::string> para_list = para.second;
+			if (_func_map.find(func_name) != _func_map.end()) {
+				fprintf(stderr, "rpc call %s find!\n", func_name.c_str());	
+				(this->*(_func_map[func_name]))(atoi(para_list[0].c_str()), atoi(para_list[1].c_str()));
+			}
 			//move the rest data in _read_buff to the front
 			for (int j = i+1; j < _buff_len; j++)
 				_read_buff[j-i-1] = _read_buff[j];

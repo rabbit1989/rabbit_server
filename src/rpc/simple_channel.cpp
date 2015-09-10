@@ -27,10 +27,16 @@ DEALINGS IN THE SOFTWARE.
 
 namespace rabbit{
 
+simple_channel::simple_channel() {
+	fprintf(stderr, "simple_channel::simple_channel()\n");
+	register_func("calculate_add",  static_cast<func_ptr>(&simple_channel::calculate_add) );
+	register_func("on_calculate_add", static_cast<func_ptr>(&simple_channel::on_calculate_add) );
+}
+
 void simple_channel::calculate_add(int a, int b) {
 	int ret = a + b;
-	printf("hello, I am server! I will do calculation (%d +%d)  for you\n", a, b);
-	rpc_call("on_calculate_add", ret, 0);
+	printf("hello, I am server! I will do calculation (%d + %d)  for you\n", a, b);
+	rpc_call("on_calculate_add", ret, 0, -1);
 }
 
 void simple_channel::on_calculate_add(int sum, int ret) {

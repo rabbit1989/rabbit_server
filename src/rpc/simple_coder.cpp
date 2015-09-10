@@ -23,6 +23,7 @@ DEALINGS IN THE SOFTWARE.
 *******************************************************************************************/
 
 #include <cstdlib>
+#include <cstdio>
 
 #include "simple_coder.hpp"
 #include "utils/string_utils.hpp"
@@ -43,6 +44,6 @@ namespace rabbit{
 	
 	std::pair<std::string, std::vector<std::string> > simple_coder::decode(const std::string &msg){
 		std::vector<std::string> para_list = string_split(msg, ' ');
-		return std::make_pair(para_list[1], std::vector<std::string>(para_list.begin()+1, para_list.end()));
+		return std::make_pair(para_list[0], std::vector<std::string>(para_list.begin()+1, para_list.end()));
 	}
 }

@@ -38,10 +38,11 @@ namespace rabbit{
 class rpc_channel {
 public:
 
-	typedef void(*func_ptr)(void*, int, int);
+	typedef void(rpc_channel::*func_ptr)(int, int);
 
 	rpc_channel():_buff_len(0){};
 	rpc_channel(tcp_client& client):_client(client), _buff_len(0){};
+	~rpc_channel(){};
 
 	void init(const std::string&, int);
 

@@ -22,12 +22,14 @@ DEALINGS IN THE SOFTWARE.
        			implementation of nonblocking tcp client
 *******************************************************************************************/
 
-#include "tcp_client.hpp"
 #include <string>
+#include <cstdio>
+
+#include "tcp_client.hpp"
 
 namespace rabbit{
 
-int const BUFFER_SIZE = 2000;
+int const BUFFER_SIZE = 1000;
 
 tcp_client::tcp_client():
 	_socket(AF_INET, SOCK_STREAM, 0),
@@ -75,7 +77,7 @@ ssize_t tcp_client::recv(char *buff, int len) {
 	return _socket.recv(buff, len, 0);
 }
 
-ssize_t tcp_client::sendAll() {
+ssize_t tcp_client::send_all() {
 	ssize_t num_bytes = 0;
 	if (_write_buff_size > 0 && _write_buff) {
 		num_bytes = send(_write_buff, _write_buff_size);
@@ -85,7 +87,7 @@ ssize_t tcp_client::sendAll() {
 	return num_bytes;	
 }
 
-ssize_t tcp_client::recvAll() {
+ssize_t tcp_client::recv_all() {
 	ssize_t num_bytes = 0;
 	if (_read_buff) {
 		num_bytes = recv(_read_buff+_read_buff_size, BUFFER_SIZE-_read_buff_size);
@@ -100,10 +102,11 @@ ssize_t tcp_client::write(const char*buffer, int len) {
 	if (_write_buff == 0) {
 		_write_buff = new char[BUFFER_SIZE];
 	}
-
+	send_all();
 	ssize_t num_bytes = len > BUFFER_SIZE-_write_buff_size ? BUFFER_SIZE-_write_buff_size : len;
 	for (ssize_t i = 0; i < num_bytes; i++)
 		_write_buff[_write_buff_size++] = buffer[i];
+
 	return num_bytes;
 }
 
@@ -111,7 +114,8 @@ ssize_t tcp_client::read(char *buffer, int len) {
 	if (_read_buff == 0) {
 		_read_buff = new char[BUFFER_SIZE];
 	}
-
+	
+	recv_all();
 	ssize_t num_bytes = len > _read_buff_size ? _read_buff_size : len;
 	for (ssize_t i = 0; i < num_bytes; i++)
 		buffer[i] = _read_buff[i];
@@ -119,6 +123,7 @@ ssize_t tcp_client::read(char *buffer, int len) {
 	//move the rest data in read buff to the front 
 	for (ssize_t i = num_bytes; i < _read_buff_size; i++)
 		_read_buff[i - num_bytes] = _read_buff[i];
+	_read_buff_size -= num_bytes;
 	return num_bytes;
 }
 

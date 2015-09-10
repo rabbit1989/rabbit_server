@@ -47,10 +47,10 @@ public:
 	ssize_t recv(char*, int);	
 
 	//sender write buffer to network
-	ssize_t sendAll();
+	ssize_t send_all();
 
 	//receive data from network and store in read buffer
-	ssize_t recvAll();
+	ssize_t recv_all();
 
 	//copy data to write buffer
 	ssize_t write(const char*, int);
