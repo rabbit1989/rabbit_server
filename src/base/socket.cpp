@@ -57,8 +57,8 @@ socket::~socket(){
 	// }
 }
 
-socket socket::accept(struct sockaddr *addr, unsigned int *addrlen) {
-	SOCKET conn = ::accept(_socket, addr, addrlen);
+socket socket::accept(struct sockaddr *addr, addr_len* len) {
+	SOCKET conn = ::accept(_socket, addr, len);
 	set_errno();
 	return socket(conn);
 }

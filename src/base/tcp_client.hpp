@@ -25,8 +25,9 @@ DEALINGS IN THE SOFTWARE.
 #ifndef TCP_CLIENT_HPP
 #define TCP_CLIENT_HPP
 
-#include "base/socket.hpp"
 #include <string>
+
+#include "base/socket.hpp"
 
 namespace rabbit{
 

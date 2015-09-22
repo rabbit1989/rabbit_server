@@ -28,6 +28,7 @@ DEALINGS IN THE SOFTWARE.
 
 #if defined(WIN32)
 	#include <winsock2.h>
+    typedef int addr_len;
 #else
     #include <sys/types.h>
     #include <unistd.h>
@@ -37,6 +38,7 @@ DEALINGS IN THE SOFTWARE.
 	#include <netinet/in.h>
 	#include <errno.h>	    
 	typedef int SOCKET;
+	typedef unsigned int addr_len;
     #define SOCKET_ERROR -1
 #endif
 
@@ -55,7 +57,7 @@ public:
 	socket(const socket&);
 	socket& operator=(const socket&);
 	virtual ~socket();
-	socket accept(struct sockaddr*, unsigned int*);
+	socket accept(struct sockaddr*, addr_len*);
 	int listen(int);
 	int bind(const struct sockaddr*, int);
 	int	connect(const struct sockaddr*, int);
