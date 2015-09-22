@@ -28,7 +28,10 @@ DEALINGS IN THE SOFTWARE.
 #include <vector>
 #include <string>
 
+#include "type.hpp"
+
 namespace rabbit{
 	std::vector<std::string> string_split(const std::string &, const char);
+	std::string to_string(const data_struct&);
 }
 #endif

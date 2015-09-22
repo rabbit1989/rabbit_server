@@ -104,7 +104,7 @@ bool tcp_server::has_new_connection(){
 	return _has_new_conn;
 }
 
-tcp_client tcp_server::get_new_connection() {
+tcp_client& tcp_server::get_new_connection() {
 	return _clients[_num_cur_clients-1];
 }
 

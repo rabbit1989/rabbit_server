@@ -29,8 +29,11 @@ add_executable(calculator_client ${CAL_CLIENT_SRC})
 set_target_properties(calculator_client PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(calculator_client LINK_PUBLIC server_lib)
 target_link_libraries(calculator_client LINK_PUBLIC ws2_32)
+set_property(TARGET calculator_client PROPERTY CXX_STANDARD 11)
 
 add_executable(calculator_server ${CAL_SERVER_SRC})
 set_target_properties(calculator_server PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(calculator_server LINK_PUBLIC server_lib)
 target_link_libraries(calculator_server LINK_PUBLIC ws2_32)
+set_property(TARGET calculator_server PROPERTY CXX_STANDARD 11)
+

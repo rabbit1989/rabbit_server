@@ -23,6 +23,8 @@ DEALINGS IN THE SOFTWARE.
 *******************************************************************************************/
 
 #include <cstdio>
+#include <string>
+
 #include "simple_channel.hpp"
 
 namespace rabbit{
@@ -31,13 +33,13 @@ simple_channel::simple_channel() {
 	register_func("calculate_add",  static_cast<func_ptr>(&simple_channel::calculate_add) );
 	register_func("on_calculate_add", static_cast<func_ptr>(&simple_channel::on_calculate_add) );
 	register_func("cal_max", static_cast<func_ptr>(&simple_channel::cal_max) );
-	register_func("on_cal_max", static_cast<func_ptr>(&simple_channel::on_cal_max) );		
+	register_func("on_cal_max", static_cast<func_ptr>(&simple_channel::on_cal_max) );
 }
 
 void simple_channel::calculate_add(int a, int b) {
 	int ret = a + b;
 	printf("hello, I am server! I will do calculation (%d + %d)  for you\n", a, b);
-	rpc_call("on_calculate_add", ret, 0, -1);
+	rpc_call(std::string("on_calculate_add"), ret, 0);
 }
 
 void simple_channel::on_calculate_add(int sum, int ret) {
@@ -48,12 +50,12 @@ void simple_channel::on_calculate_add(int sum, int ret) {
 void simple_channel::cal_max(int a, int b) {
 	int ret = a > b ? a : b;
 	printf("server side: max(%d, %d)\n", a, b);
-	rpc_call("on_cal_max", ret, -1, -1);
+	rpc_call(std::string("on_cal_max"), ret, -1);
 }
 
 void simple_channel::on_cal_max(int val, int) {
 	printf("client side: the max number is %d\n", val);
 }
 
- }
+}
  

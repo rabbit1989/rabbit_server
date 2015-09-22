@@ -30,9 +30,8 @@ DEALINGS IN THE SOFTWARE.
 
 namespace rabbit{
 	class simple_coder: public rpc_coder_base {
-		// variable length parameter list ends with -1
-		virtual const std::string encode(const char*, va_list);
-		virtual std::pair<std::string, std::vector<std::string> > decode(const std::string &);
+		virtual const std::string encode(std::stack<data_struct>);
+		virtual const std::vector<std::string> decode(const std::string &);
 	};
 }
 

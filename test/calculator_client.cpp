@@ -1,8 +1,9 @@
+#include <cstdio>
+
 #include "rpc/simple_channel.hpp"
 #include "rpc/simple_coder.hpp"
 #include "base/env_init.hpp"
 #include "utils/sys_call_wrapper.hpp"
-#include <cstdio>
 
 int main(){
 	rabbit::init_env();
@@ -15,7 +16,8 @@ int main(){
 	{
 		// the last number is the delimiter
 		fprintf(stderr, "calculate max(%d, %d)...\n", i, 100-i);
-		client.rpc_call("cal_max", i, 100-i, -1);
+		std::string func_name = "cal_max";
+		client.rpc_call(func_name, i, 100-i);
 		client.rpc_response();
 		rabbit::sleep(1000);	
 	}

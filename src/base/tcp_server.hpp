@@ -46,7 +46,7 @@ public:
 	void add_client(socket&);
 	void close();
 	bool has_new_connection();
-	tcp_client get_new_connection();
+	tcp_client& get_new_connection();
 	void loop();
 private:
 	socket _socket;

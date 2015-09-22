@@ -114,12 +114,10 @@ ssize_t tcp_client::read(char *buffer, int len) {
 	if (_read_buff == 0) {
 		_read_buff = new char[BUFFER_SIZE];
 	}
-	
 	recv_all();
 	ssize_t num_bytes = len > _read_buff_size ? _read_buff_size : len;
 	for (ssize_t i = 0; i < num_bytes; i++)
 		buffer[i] = _read_buff[i];
-
 	//move the rest data in read buff to the front 
 	for (ssize_t i = num_bytes; i < _read_buff_size; i++)
 		_read_buff[i - num_bytes] = _read_buff[i];

@@ -29,9 +29,11 @@ DEALINGS IN THE SOFTWARE.
 
 #include <map>
 #include <string>
+#include <stack>
 
 #include "base/tcp_client.hpp"
 #include "rpc/rpc_coder.hpp"
+#include "utils/type.hpp"
 
 namespace rabbit{
 
@@ -47,8 +49,9 @@ public:
 	void init(const std::string&, int);
 
 	//call rpc method
-	void rpc_call(const char*, ...);	
-	
+	template<typename...args>
+	void rpc_call(args...);
+
 	//receive data and execute rpc method
 	void rpc_response();
 	
@@ -59,15 +62,39 @@ public:
 	
 	void set_client(const tcp_client&);
 	void close();
+
+private:
+
+	// use variadic template to push variable number of paramenters into stack
+	template<typename T,  typename...args>
+	void push_rpc_args(const T&, args...);
+	void push_rpc_args();
+
 private:
 	tcp_client _client;
 	std::map<std::string, func_ptr> _func_map;
 	rpc_coder_base *_rpc_coder;
 
+	// rpc argument stack 
+	std::stack<data_struct> _args_stack;
+
 	//the buffer will be removed later
 	char _read_buff[300];
 	int _buff_len;
 };
+
+template<typename... args>
+void rpc_channel::rpc_call(args... para){
+	push_rpc_args(para...);
+	std::string msg = _rpc_coder->encode(_args_stack);
+    _client.write(msg.c_str(), msg.length());
+}
+
+template<typename T, typename... args>
+void rpc_channel::push_rpc_args(const T& value, args... para){
+	push_rpc_args(para...);
+	_args_stack.push(to_data_struct(value));
+}
 
 }
 

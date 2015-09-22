@@ -24,6 +24,7 @@ DEALINGS IN THE SOFTWARE.
 #include <utility>
 #include <cstdlib>
 #include <cstdio>
+#include <vector>
 
 #include "rpc_channel.hpp"
 
@@ -33,30 +34,30 @@ void rpc_channel::init(const std::string& ip, int port){
 	_client.connect(ip, port);
 }
 
-void rpc_channel::rpc_call(const char* func_name, ...){
-	va_list args;
-    va_start(args, func_name);
-    std::string msg = _rpc_coder->encode(func_name, args);
-    _client.write(msg.c_str(), msg.length());
-    va_end(args);
+void rpc_channel::push_rpc_args(){
+	while (!_args_stack.empty()) {
+		_args_stack.pop();
+	}
 }
 
 void rpc_channel::rpc_response() {
 	int num_bytes = _client.read(_read_buff + _buff_len, 300-_buff_len);
 	_buff_len += num_bytes;
-
 	if (_buff_len && _read_buff[0] == '#') {
 		int i = 1;
 		for (i = 1; i < _buff_len; i++)
 			if (_read_buff[i] == '#')
 				break;
+
 		if (i != _buff_len) {
-			std::pair<std::string, std::vector<std::string> >para = _rpc_coder->decode(std::string(_read_buff+1, i-1));				
-			std::string func_name = para.first;
-			std::vector<std::string> para_list = para.second;
+			std::vector<std::string> para = _rpc_coder->decode(std::string(_read_buff+1, i-1));				
+			std::string func_name = para[0];
+			std::string first_para = para[1];
+			std::string sec_para = para[2];
+
 			if (_func_map.find(func_name) != _func_map.end()) {
 				fprintf(stderr, "rpc_channel::rpc_response(): rpc call %s find!\n", func_name.c_str());	
-				(this->*(_func_map[func_name]))(atoi(para_list[0].c_str()), atoi(para_list[1].c_str()));
+				(this->*(_func_map[func_name]))(atoi(first_para.c_str()), atoi(sec_para.c_str()));
 			}
 			else {
 				fprintf(stderr, "rpc_channel::rpc_response(): unknown rpc call: %s\n", func_name.c_str());

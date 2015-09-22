@@ -26,6 +26,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/utils)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/rpc)
 
 add_library(server_lib STATIC ${TMP_FILES})
-
+set_property(TARGET server_lib PROPERTY CXX_STANDARD 11)
 
 

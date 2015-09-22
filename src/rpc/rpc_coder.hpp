@@ -26,16 +26,19 @@ DEALINGS IN THE SOFTWARE.
 #define RPC_CODER_HPP
 
 #include <string>
+#include <stack>
 #include <vector>
 #include <stdarg.h>
 #include <cstring>
+
+#include "type.hpp"
 
 namespace rabbit{
 
 class rpc_coder_base{
 public:
-	virtual const std::string encode(const char*, va_list) = 0;
-	virtual std::pair<std::string, std::vector<std::string> > decode(const std::string &) = 0;
+	virtual const std::string encode(const std::stack<data_struct>) = 0;
+	virtual const std::vector<std::string> decode(const std::string &) = 0;
 };
 
 }

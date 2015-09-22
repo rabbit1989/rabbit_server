@@ -54,8 +54,9 @@ void rpc_server::run() {
 		if (_server.has_new_connection()) {
 			add_channel(_server.get_new_connection());
 		}
-		for (int i = 0; i < _num_channel; i++) 
+		for (int i = 0; i < _num_channel; i++) {			
 			_channel_list[i]->rpc_response();
+		}
 		sleep(1000);
 	}
 }

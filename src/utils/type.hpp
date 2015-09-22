@@ -19,39 +19,37 @@ FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TOR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 *************************************************************************
-                some string processing functions
+	              	data type structure
 *************************************************************************/
-#include <cstdio>
 
-#include "string_utils.hpp"
+#ifndef TYPE_HPP
+#define TYPE_HPP
+
+#include <string>
 
 namespace rabbit{
-	std::vector<std::string> string_split(const std::string &str, const char sep) {
-		std::vector<std::string> ret;
-		size_t i = 0, j = 0;
-		size_t length = str.length();
-		while (i < length) {
-			while (i < length && str[i] == sep)i++;
-			j = i+1;
-			while (j < length && str[j] != sep)j++;
-			ret.push_back(str.substr(i, j-i));
-			i = j+1;
-		}
-		return ret;
-	}
 
-	std::string to_string(const data_struct& value){
-		switch(value.type) {
-			case INT:  
-				char num_in_str[10];
-				itoa(value.i_val, num_in_str, 10);
-				return std::string(num_in_str);
-				break;
-			case STRING: return value.s_val; break;
-			case FLOAT: break;
-			default: fprintf(stderr, "string_utils.cpp: to_string(): unknown data type!\n");
-		}
-		return "unknown_data";
-	}
+enum TYPE{INT, FLOAT, STRING};
+
+typedef struct{
+	int i_val;
+	float f_val;
+	std::string s_val;
+	TYPE type;
+}data_struct;
+
+template<typename T>
+data_struct to_data_struct(const T&);
+
+template<>
+data_struct to_data_struct<int>(const int&);
+
+template<>
+data_struct to_data_struct<std::string>(const std::string &);
+
+//template<>
+//data_struct to_data_struct<const char*>(const char*&);
 
 }
+
+#endif
