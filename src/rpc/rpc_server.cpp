@@ -22,6 +22,7 @@ DEALINGS IN THE SOFTWARE.
        					simple rpc server
 *******************************************************************************************/
 #include <cstdio>
+#include <cstdlib>
 #include "rpc_server.hpp"
 #include "utils/sys_call_wrapper.hpp"
 #include "rpc/simple_channel.hpp"

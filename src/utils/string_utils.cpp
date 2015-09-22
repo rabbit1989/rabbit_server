@@ -44,7 +44,7 @@ namespace rabbit{
 		switch(value.type) {
 			case INT:  
 				char num_in_str[10];
-				itoa(value.i_val, num_in_str, 10);
+				sprintf(num_in_str, "%d", value.i_val);				
 				return std::string(num_in_str);
 				break;
 			case STRING: return value.s_val; break;

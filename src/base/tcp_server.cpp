@@ -22,9 +22,12 @@ DEALINGS IN THE SOFTWARE.
        			implementation of nonblocking tcp server
 *******************************************************************************************/
 
-#include "tcp_server.hpp"
 #include <string>
 #include <memory>
+#include <cstdio>
+
+#include "tcp_server.hpp"
+
 
 namespace rabbit{
 
@@ -57,11 +60,11 @@ void tcp_server::init_clients(int num_clients) {
 }
 
 void tcp_server::init(const std::string& ip, int port) {
-	SOCKADDR_IN addr;
+	sockaddr_in addr;
 	addr.sin_family = AF_INET;
 	addr.sin_addr.s_addr = inet_addr(ip.c_str());
 	addr.sin_port = htons(port);
-	_socket.bind((SOCKADDR*)&addr, sizeof(SOCKADDR));
+	_socket.bind((sockaddr*)&addr, sizeof(sockaddr));
 	_socket.listen(_num_max_clients);
 	_socket.set_nonblocking(1);
 }

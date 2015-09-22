@@ -29,11 +29,15 @@ DEALINGS IN THE SOFTWARE.
 #if defined(WIN32)
 	#include <winsock2.h>
 #else
-	#include <sys/types.h>
+    #include <sys/types.h>
     #include <unistd.h>
     #include <fcntl.h>
-	#include <sys/socket.h>
-    typedef int SOCKET
+    #include <sys/socket.h>
+    #include <arpa/inet.h>
+	#include <netinet/in.h>
+	#include <errno.h>	    
+	typedef int SOCKET;
+    #define SOCKET_ERROR -1
 #endif
 
 #include <string>
@@ -51,7 +55,7 @@ public:
 	socket(const socket&);
 	socket& operator=(const socket&);
 	virtual ~socket();
-	socket accept(struct sockaddr*, int*);
+	socket accept(struct sockaddr*, unsigned int*);
 	int listen(int);
 	int bind(const struct sockaddr*, int);
 	int	connect(const struct sockaddr*, int);

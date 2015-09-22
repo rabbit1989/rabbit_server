@@ -1,3 +1,5 @@
+#include <cstdio>
+
 #include "tcp_server.hpp"
 #include "env_init.hpp"
 

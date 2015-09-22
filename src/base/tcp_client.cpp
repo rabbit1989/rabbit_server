@@ -59,7 +59,7 @@ void tcp_client::connect(const std::string& ip, int port){
 	addr.sin_port = htons(port);
 	addr.sin_family = AF_INET;
 	addr.sin_addr.s_addr = inet_addr(ip.c_str());
-	_socket.connect((SOCKADDR*)&addr, sizeof(SOCKADDR));
+	_socket.connect((sockaddr*)&addr, sizeof(sockaddr));
 	_socket.set_nonblocking(1);
 	_read_buff = new char[BUFFER_SIZE];
 	_write_buff = new char[BUFFER_SIZE];

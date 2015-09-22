@@ -25,6 +25,8 @@ DEALINGS IN THE SOFTWARE.
 #ifndef UNCOPYABLE_HPP
 #define UNCOPYABLE_HPP
 
+namespace rabbit{
+
 class uncopyable{
 protected:
     uncopyable(){};
@@ -33,5 +35,7 @@ private:
     uncopyable(uncopyable&);
     uncopyable& operator=(uncopyable&);
 };
-
+}
 #endif // UNCOPYABLE_HPP
+
+

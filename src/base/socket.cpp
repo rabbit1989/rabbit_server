@@ -57,7 +57,7 @@ socket::~socket(){
 	// }
 }
 
-socket socket::accept(struct sockaddr *addr, int *addrlen) {
+socket socket::accept(struct sockaddr *addr, unsigned int *addrlen) {
 	SOCKET conn = ::accept(_socket, addr, addrlen);
 	set_errno();
 	return socket(conn);
@@ -118,7 +118,7 @@ int socket::set_nonblocking(u_long mode) {
 		int flags = fcntl(_socket, F_GETFL, 0);
 		if (flags >= 0) {
 			flags = mode ? (flags|O_NONBLOCK) : (flags&~O_NONBLOCK);
-			ret = fcntl(_scoket, F_SETFL, flags);
+			ret = fcntl(_socket, F_SETFL, flags);
 		}
 	#endif
 	set_errno();
