@@ -3,6 +3,7 @@
 
 #include "tcp_client.hpp"
 #include "env_init.hpp"
+#include "utils/sys_call_wrapper.hpp"
 
 int main()
 {
@@ -18,13 +19,10 @@ int main()
 	while (true) {
 		sprintf(msg, "Hello server I am client! time: %d ", cur_time);
 		fprintf(stderr, "send message %s to server\n", msg);
-		client.send((char*)msg, strlen(msg));
+		int bytes = client.send((char*)msg, strlen(msg));
+		fprintf(stderr, "num bytes sent: %d\n", bytes);		
 		cur_time += 1;
-		#if defined(WIN32)
-			Sleep(1000);
-		#else
-			sleep(1);
-		#endif
+		rabbit::sleep(1000);
 	}
 	client.close();
 	

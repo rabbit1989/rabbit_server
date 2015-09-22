@@ -52,7 +52,7 @@ void rpc_server::init(const std::string &addr, const int port) {
 void rpc_server::run() {
 	while (true) {
 		_server.loop();
-		if (_server.has_new_connection()) {
+		if (_server.has_new_connection()) {				
 			add_channel(_server.get_new_connection());
 		}
 		for (int i = 0; i < _num_channel; i++) {			

@@ -21,6 +21,7 @@ DEALINGS IN THE SOFTWARE.
 *************************************************************************
               wrapper functions of some platform-dependent syste calls
 *************************************************************************/
+#include <cstdio>
 
 #include "sys_call_wrapper.hpp"
 
@@ -29,7 +30,7 @@ namespace rabbit{
 		#if defined(WIN32)
 			Sleep(miliseconds);
 		#else
-			sleep(miliseconds/1000);
+			::sleep(miliseconds/1000);
 		#endif
 	}
 }

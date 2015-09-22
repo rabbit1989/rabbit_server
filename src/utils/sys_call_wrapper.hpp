@@ -32,7 +32,7 @@ DEALINGS IN THE SOFTWARE.
 #endif
 
 namespace rabbit{
-    // sleep for serverl miliseconds
+    // sleep for serval miliseconds
     void sleep(float);
 }
 #endif
