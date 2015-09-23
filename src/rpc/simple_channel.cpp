@@ -39,7 +39,7 @@ simple_channel::simple_channel() {
 void simple_channel::calculate_add(int a, int b) {
 	int ret = a + b;
 	printf("hello, I am server! I will do calculation (%d + %d)  for you\n", a, b);
-	rpc_call(std::string("on_calculate_add"), ret, 0);
+	rpc_call("on_calculate_add", ret, 0);
 }
 
 void simple_channel::on_calculate_add(int sum, int ret) {
@@ -50,7 +50,7 @@ void simple_channel::on_calculate_add(int sum, int ret) {
 void simple_channel::cal_max(int a, int b) {
 	int ret = a > b ? a : b;
 	printf("server side: max(%d, %d)\n", a, b);
-	rpc_call(std::string("on_cal_max"), ret, -1);
+	rpc_call("on_cal_max", ret, -1);
 }
 
 void simple_channel::on_cal_max(int val, int) {

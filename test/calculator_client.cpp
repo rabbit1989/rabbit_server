@@ -15,9 +15,8 @@ int main(){
 	for (int i = 0; i < 100; i++)
 	{
 		// the last number is the delimiter
-		fprintf(stderr, "calculate max(%d, %d)...\n", i, 100-i);
-		std::string func_name = "cal_max";
-		client.rpc_call(func_name, i, 100-i);
+		fprintf(stderr, "calculate add(%d, %d)...\n", i, 100-i);
+		client.rpc_call("calculate_add", i, 100-i);
 		client.rpc_response();
 		rabbit::sleep(1000);	
 	}

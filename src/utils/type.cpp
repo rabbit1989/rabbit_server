@@ -26,28 +26,18 @@ DEALINGS IN THE SOFTWARE.
 
 namespace rabbit{
 
-template<>
-data_struct to_data_struct<int>(const int &val){
+data_struct to_data_struct(const int &val){
 	data_struct ret;
 	ret.type = INT;
 	ret.i_val = val;
 	return ret;
 }
 
-template<>
-data_struct to_data_struct<std::string>(const std::string& val){
+data_struct to_data_struct(const std::string& val){
 	data_struct ret;
 	ret.type = STRING;
 	ret.s_val = val;
 	return ret;
 }
-
-// template<>
-// data_struct to_data_struct<const char*>(const char *& val){
-// 	data_struct ret;
-// 	ret.type = STRING;
-// 	ret.s_val = val;
-// 	return ret;
-// }
 
 }

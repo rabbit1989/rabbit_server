@@ -38,17 +38,9 @@ typedef struct{
 	TYPE type;
 }data_struct;
 
-template<typename T>
-data_struct to_data_struct(const T&);
-
-template<>
-data_struct to_data_struct<int>(const int&);
-
-template<>
-data_struct to_data_struct<std::string>(const std::string &);
-
-//template<>
-//data_struct to_data_struct<const char*>(const char*&);
+//overload functions of to_data_struct()
+data_struct to_data_struct(const int&);
+data_struct to_data_struct(const std::string &);
 
 }
 
