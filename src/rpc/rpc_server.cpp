@@ -25,7 +25,7 @@ DEALINGS IN THE SOFTWARE.
 #include <cstdlib>
 #include "rpc_server.hpp"
 #include "utils/sys_call_wrapper.hpp"
-#include "rpc/simple_channel.hpp"
+#include "rpc/rpc_channel.hpp"
 
 namespace rabbit{
 
@@ -67,7 +67,7 @@ void rpc_server::add_channel(const tcp_client& client) {
 		fprintf(stderr, "rpc_server::add_channel(): number of channel reaches maximum!!\n");
 		return;
 	}
-	_channel_list[_num_channel] = new simple_channel;
+	_channel_list[_num_channel] = new rpc_channel;
 	_channel_list[_num_channel]->set_client(client);
 	_channel_list[_num_channel]->set_rpc_coder(_rpc_coder);
 	_num_channel++;

@@ -42,6 +42,13 @@ typedef struct{
 data_struct to_data_struct(const int&);
 data_struct to_data_struct(const std::string &);
 
-}
+//get original data from data_struct
+template<typename T>
+T from_data_struct(const data_struct&);
 
+template<>
+int from_data_struct<int>(const data_struct&);
+template<>
+std::string from_data_struct<std::string>(const data_struct&);
+}
 #endif

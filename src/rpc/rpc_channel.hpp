@@ -34,19 +34,20 @@ DEALINGS IN THE SOFTWARE.
 #include "base/tcp_client.hpp"
 #include "rpc/rpc_coder.hpp"
 #include "utils/type.hpp"
+#include "utils/uncopyable.hpp"
 
 namespace rabbit{
 
-class rpc_channel {
+class rpc_command;
+class rpc_channel: uncopyable {
 public:
 
-	typedef void(rpc_channel::*func_ptr)(int, int);
-
-	rpc_channel():_buff_len(0){};
-	rpc_channel(tcp_client& client):_client(client), _buff_len(0){};
-	~rpc_channel(){};
+	rpc_channel();
+	rpc_channel(tcp_client& client);
+	~rpc_channel();
 
 	void init(const std::string&, int);
+	void reg_rpc_commands();
 
 	//call rpc method
 	template<typename...args>
@@ -55,9 +56,6 @@ public:
 	//receive data and execute rpc method
 	void rpc_response();
 	
-	//register rpc methods
-	void register_func(const std::string&, func_ptr);	
-
 	void set_rpc_coder(rpc_coder_base*);
 	
 	void set_client(const tcp_client&);
@@ -72,8 +70,8 @@ private:
 
 private:
 	tcp_client _client;
-	std::map<std::string, func_ptr> _func_map;
-	rpc_coder_base *_rpc_coder;
+	std::map<std::string, rpc_command*> _rc_map;
+	rpc_coder_base *_rpc_coder;	
 
 	// rpc argument stack 
 	std::stack<data_struct> _args_stack;
@@ -95,7 +93,6 @@ void rpc_channel::push_rpc_args(const T& value, args... para){
 	push_rpc_args(para...);
 	_args_stack.push(to_data_struct(value));
 }
-
 }
 
 #endif

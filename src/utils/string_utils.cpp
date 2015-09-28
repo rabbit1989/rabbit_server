@@ -54,4 +54,11 @@ namespace rabbit{
 		return "unknown_data";
 	}
 
+	int str2int(const std::string &str) {
+		int ret = 0;
+		for (int i = 0; i < str.size(); i++)
+			ret = ret*10 + str[i] - 48;
+		return ret;
+	}
+
 }

@@ -33,5 +33,6 @@ DEALINGS IN THE SOFTWARE.
 namespace rabbit{
 	std::vector<std::string> string_split(const std::string &, const char);
 	std::string to_string(const data_struct&);
+	int str2int(const std::string&);
 }
 #endif

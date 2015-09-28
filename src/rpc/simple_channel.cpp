@@ -30,10 +30,6 @@ DEALINGS IN THE SOFTWARE.
 namespace rabbit{
 
 simple_channel::simple_channel() {
-	register_func("calculate_add",  static_cast<func_ptr>(&simple_channel::calculate_add) );
-	register_func("on_calculate_add", static_cast<func_ptr>(&simple_channel::on_calculate_add) );
-	register_func("cal_max", static_cast<func_ptr>(&simple_channel::cal_max) );
-	register_func("on_cal_max", static_cast<func_ptr>(&simple_channel::on_cal_max) );
 }
 
 void simple_channel::calculate_add(int a, int b) {

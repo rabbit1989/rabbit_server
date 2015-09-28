@@ -25,13 +25,47 @@ DEALINGS IN THE SOFTWARE.
 #include <cstdlib>
 #include <cstdio>
 #include <vector>
+#include <map>
 
-#include "rpc_channel.hpp"
+#include "rpc/rpc_channel.hpp"
+#include "utils/type.hpp"
+#include "rpc/rpc_commands.hpp"
 
 namespace rabbit{
 
+rpc_channel::rpc_channel():_buff_len(0){
+	reg_rpc_commands();
+};
+
+rpc_channel::rpc_channel(tcp_client& client):_client(client), _buff_len(0){
+	reg_rpc_commands();
+};
+
+rpc_channel::~rpc_channel(){
+	std::map<std::string, rpc_command*>::iterator iter = _rc_map.begin();
+	std::map<std::string, rpc_command*>::iterator it_end= _rc_map.end();
+	for (;iter != it_end; iter++) {
+		delete iter->second;
+	}
+};
+
+void rpc_channel::reg_rpc_commands() {
+	rpc_command *rc1 = new rc_calculate_add;
+	_rc_map["calculate_add"] = rc1;
+
+	rpc_command *rc2 = new rc_on_calculate_add;
+	_rc_map["on_calculate_add"] = rc2;
+
+	rpc_command *rc3 = new rc_cal_max;
+	_rc_map["cal_max"] = rc3;
+
+	rpc_command *rc4 = new rc_on_cal_max;
+	_rc_map["on_cal_max"] = rc4;
+}
+
 void rpc_channel::init(const std::string& ip, int port){
-	_client.connect(ip, port);
+	//configure network setting
+	_client.connect(ip, port);	
 }
 
 void rpc_channel::push_rpc_args(){
@@ -50,14 +84,13 @@ void rpc_channel::rpc_response() {
 				break;
 
 		if (i != _buff_len) {
-			std::vector<std::string> para = _rpc_coder->decode(std::string(_read_buff+1, i-1));				
-			std::string func_name = para[0];
-			std::string first_para = para[1];
-			std::string sec_para = para[2];
+			std::vector<data_struct> para = _rpc_coder->decode(std::string(_read_buff+1, i-1));				
+			std::string func_name = from_data_struct<std::string>(para[0]);
+			std::vector<data_struct> para_list = std::vector<data_struct>(para.begin()+1, para.end());
 
-			if (_func_map.find(func_name) != _func_map.end()) {
-				fprintf(stderr, "rpc_channel::rpc_response(): rpc call %s find!\n", func_name.c_str());	
-				(this->*(_func_map[func_name]))(atoi(first_para.c_str()), atoi(sec_para.c_str()));
+			if (_rc_map.find(func_name) != _rc_map.end()) {
+		//		fprintf(stderr, "rpc_channel::rpc_response(): rpc call %s find!\n", func_name.c_str());	
+				_rc_map[func_name]->execute(para_list, this);
 			}
 			else {
 				fprintf(stderr, "rpc_channel::rpc_response(): unknown rpc call: %s\n", func_name.c_str());
@@ -69,10 +102,6 @@ void rpc_channel::rpc_response() {
 			_buff_len -= (i+1);
 		}
 	}
-}
-
-void rpc_channel::register_func(const std::string& func_name, rpc_channel::func_ptr ptr){
-	_func_map[func_name] = ptr;
 }
 
 void rpc_channel::set_rpc_coder(rpc_coder_base *coder) {

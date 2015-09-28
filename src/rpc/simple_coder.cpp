@@ -42,7 +42,15 @@ namespace rabbit{
 		return msg;
 	}
 	
-	const std::vector<std::string> simple_coder::decode(const std::string &msg){
-		return string_split(msg, ' ');
+	const std::vector<data_struct> simple_coder::decode(const std::string &msg){
+		std::vector<std::string> string_list = string_split(msg, ' ');
+		std::vector<data_struct> para;
+		para.push_back(to_data_struct(string_list[0]));
+
+		for (std::vector<std::string>::iterator iter = string_list.begin()+1; iter != string_list.end(); iter++) {
+			para.push_back(to_data_struct(str2int(*iter)));
+		}
+		return para;
+
 	}
 }

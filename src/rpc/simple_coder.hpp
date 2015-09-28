@@ -26,12 +26,13 @@ DEALINGS IN THE SOFTWARE.
 #ifndef SIMPLE_CODER_HPP
 #define SIMPLE_CODER_HPP
 
-#include "rpc_coder.hpp"
+#include "rpc/rpc_coder.hpp"
+#include "utils/type.hpp"
 
 namespace rabbit{
 	class simple_coder: public rpc_coder_base {
 		virtual const std::string encode(std::stack<data_struct>);
-		virtual const std::vector<std::string> decode(const std::string &);
+		virtual const std::vector<data_struct> decode(const std::string &);
 	};
 }
 

@@ -38,7 +38,7 @@ namespace rabbit{
 class rpc_coder_base{
 public:
 	virtual const std::string encode(const std::stack<data_struct>) = 0;
-	virtual const std::vector<std::string> decode(const std::string &) = 0;
+	virtual const std::vector<data_struct> decode(const std::string &) = 0;
 };
 
 }
